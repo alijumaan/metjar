@@ -37,7 +37,11 @@ class OrdersComponent extends Component
             $admin->notify(new ReturnRequestOrderNotification($order));
         });
 
-        $this->alert('success', 'Your request is sent successfully');
+        $this->dispatch(
+    'show-alert',
+    type: 'success',
+    message: 'Your request is sent successfully'
+);
     }
 
     public function render()

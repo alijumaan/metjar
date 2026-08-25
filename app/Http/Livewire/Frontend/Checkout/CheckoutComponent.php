@@ -6,13 +6,10 @@ use App\Models\Coupon;
 use App\Models\PaymentMethod;
 use App\Models\ShippingCompany;
 use App\Models\UserAddress;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class CheckoutComponent extends Component
 {
-    use LivewireAlert;
-
     public $cartSubTotal;
     public $cartTax;
     public $cartTotal;
@@ -58,17 +55,29 @@ class CheckoutComponent extends Component
             $coupon = Coupon::whereCode($this->couponCode)->whereStatus(true)->first();
             if (!$coupon) {
                 $this->couponCode = '';
-                $this->alert('error', 'Coupon is invalid');
+                $this->dispatch(
+    'show-alert',
+    type: 'error',
+    message: 'Coupon is invalid'
+);
             }
 
             if ($coupon->greater_than > getNumbersOfCart()->get('subtotal')) {
                 $this->couponCode = '';
-                $this->alert('warning', 'Subtotal must greater than $'. $coupon->greater_than);
+                $this->dispatch(
+                    'show-alert',
+                    type: 'warning',
+                    message: 'Subtotal must greater than $' . $coupon->greater_than
+                );
             }
 
             $couponValue = $coupon->discount($this->cartSubTotal);
             if ($couponValue < 0) {
-                $this->alert('error', 'product coupon is invalid');
+                $this->dispatch(
+    'show-alert',
+    type: 'error',
+    message: 'product coupon is invalid'
+);
             }
 
             session()->put('coupon', [
@@ -78,20 +87,32 @@ class CheckoutComponent extends Component
             ]);
 
             $this->couponCode = session()->get('coupon')['code'];
-            $this->emit('update_cart');
-            $this->alert('success', 'Coupon is applied successfully');
+            $this->dispatch('update_cart');
+            $this->dispatch(
+    'show-alert',
+    type: 'success',
+    message: 'Coupon is applied successfully'
+);
         }
 
         $this->couponCode = '';
-        $this->alert('error', 'No products available in your cart');
+        $this->dispatch(
+    'show-alert',
+    type: 'error',
+    message: 'No products available in your cart'
+);
     }
 
     public function removeCoupon()
     {
         session()->remove('coupon');
         $this->couponCode = '';
-        $this->emit('update_cart');
-        $this->alert('success', 'remove coupon successfully');
+        $this->dispatch('update_cart');
+        $this->dispatch(
+    'show-alert',
+    type: 'success',
+    message: 'remove coupon successfully'
+);
     }
 
     public function getShippingCompanies()
@@ -113,7 +134,7 @@ class CheckoutComponent extends Component
         $this->userAddressId = session()->has('saved_user_address_id') ? session()->get('saved_user_address_id') : '';
         $this->shippingCompanyId = session()->has('saved_shipping_company_id') ? session()->get('saved_shipping_company_id') : '';
         $this->paymentMethodId = session()->has('saved_payment_method_id') ? session()->get('saved_payment_method_id') : '';
-        $this->emit('update_cart');
+        $this->dispatch('update_cart');
     }
 
     // Lifecycle Hooks updated (UserAddressId)
@@ -127,7 +148,7 @@ class CheckoutComponent extends Component
         $this->userAddressId = session()->has('saved_user_address_id') ? session()->get('saved_user_address_id') : '';
         $this->shippingCompanyId = session()->has('saved_shipping_company_id') ? session()->get('saved_shipping_company_id') : '';
         $this->paymentMethodId = session()->has('saved_payment_method_id') ? session()->get('saved_payment_method_id') : '';
-        $this->emit('update_cart');
+        $this->dispatch('update_cart');
     }
 
     public function storeShippingCost()
@@ -139,8 +160,12 @@ class CheckoutComponent extends Component
             'cost' => $shippingCompany->cost
         ]);
 
-        $this->emit('update_cart');
-        $this->alert('success', 'Shipping cost is applied successfully');
+        $this->dispatch('update_cart');
+        $this->dispatch(
+    'show-alert',
+    type: 'success',
+    message: 'Shipping cost is applied successfully'
+);
     }
 
     // Lifecycle Hooks updating (ShippingCompanyId)
@@ -150,7 +175,7 @@ class CheckoutComponent extends Component
         session()->put('saved_shipping_company_id', $this->shippingCompanyId);
         $this->userAddressId = session()->has('saved_user_address_id') ? session()->get('saved_user_address_id') : '';
         $this->shippingCompanyId = session()->has('saved_shipping_company_id') ? session()->get('saved_shipping_company_id') : '';
-        $this->emit('update_cart');
+        $this->dispatch('update_cart');
     }
 
     // Lifecycle Hooks updated (ShippingCompanyId)
@@ -160,7 +185,7 @@ class CheckoutComponent extends Component
         session()->put('saved_shipping_company_id', $this->shippingCompanyId);
         $this->userAddressId = session()->has('saved_user_address_id') ? session()->get('saved_user_address_id') : '';
         $this->shippingCompanyId = session()->has('saved_shipping_company_id') ? session()->get('saved_shipping_company_id') : '';
-        $this->emit('update_cart');
+        $this->dispatch('update_cart');
     }
 
     public function getPaymentMethod()

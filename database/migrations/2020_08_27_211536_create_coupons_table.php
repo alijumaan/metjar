@@ -23,7 +23,7 @@ class CreateCouponsTable extends Migration
             $table->integer('used_times')->default(0);
             $table->dateTime('start_date')->nullable();
             $table->dateTime('expire_date')->nullable();
-            $table->unsignedDecimal('greater_than')->nullable();
+            $table->decimal('greater_than', 15, 2)->unsigned()->nullable();
             $table->boolean('status')->default(false);
             $table->boolean('is_public')->default(false);
             $table->timestamps();

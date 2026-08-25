@@ -19,7 +19,7 @@ class CreateShippingCompaniesTable extends Migration
             $table->string('code')->unique();
             $table->string('description')->unique();
             $table->boolean('fast')->default(false);
-            $table->unsignedDecimal('cost')->default('0.00');
+            $table->decimal('cost')->default('0.00');
             $table->boolean('status')->default(false);
             $table->timestamps();
         });

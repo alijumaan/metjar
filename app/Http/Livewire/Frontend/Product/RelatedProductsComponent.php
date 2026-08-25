@@ -4,14 +4,10 @@ namespace App\Http\Livewire\Frontend\Product;
 
 use App\Models\Product;
 use App\Services\CartService;
-use Gloudemans\Shoppingcart\Facades\Cart;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class RelatedProductsComponent extends Component
 {
-    use LivewireAlert;
-
     public $relatedProducts;
 
     public function mount($relatedProducts)
@@ -24,10 +20,18 @@ class RelatedProductsComponent extends Component
         $product = Product::whereId($id)->Active()->HasQuantity()->ActiveCategory()->firstOrFail();
         try {
             (new CartService())->addToList('default', $product);
-            $this->emit('update_cart');
-            $this->alert('success', 'added to Cart.');
+            $this->dispatch('update_cart');
+            $this->dispatch(
+    'show-alert',
+    type: 'success',
+    message: 'added to Cart.'
+);
         } catch(\Exception $exception) {
-            $this->alert('warning', $exception->getMessage());
+            $this->dispatch(
+    'show-alert',
+    type: 'warning',
+    message: $exception->getMessage()
+);
         }
     }
 
@@ -36,10 +40,18 @@ class RelatedProductsComponent extends Component
         $product = Product::whereId($id)->Active()->HasQuantity()->ActiveCategory()->firstOrFail();
         try {
             (new CartService())->addToList('wishlist', $product);
-            $this->emit('update_wishlist');
-            $this->alert('success', 'added to Wishlist.');
+            $this->dispatch('update_wishlist');
+            $this->dispatch(
+    'show-alert',
+    type: 'success',
+    message: 'added to Wishlist.'
+);
         } catch(\Exception $exception) {
-            $this->alert('warning', $exception->getMessage());
+            $this->dispatch(
+    'show-alert',
+    type: 'warning',
+    message: $exception->getMessage()
+);
         }
     }
 

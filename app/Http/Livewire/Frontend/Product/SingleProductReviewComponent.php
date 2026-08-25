@@ -6,13 +6,10 @@ use App\Models\Order;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class SingleProductReviewComponent extends Component
 {
-    use LivewireAlert;
-
     public $showForm = true;
     public $canRate = false;
     public $product;
@@ -59,7 +56,11 @@ class SingleProductReviewComponent extends Component
     public function rate(Request $request)
     {
         if (!$this->checkProduct){
-            $this->alert('error', 'You must buy this item first');
+            $this->dispatch(
+    'show-alert',
+    type: 'error',
+    message: 'You must buy this item first'
+);
             return false;
         }
 
@@ -77,10 +78,18 @@ class SingleProductReviewComponent extends Component
             $rating->status = 1;
             $rating->save();
             Cache::forget('recent_reviews');
-            $this->alert('success', 'Your review added successfully');
+            $this->dispatch(
+    'show-alert',
+    type: 'success',
+    message: 'Your review added successfully'
+);
         } else {
             if ($rating->status == 'Inactive'){
-                $this->alert('error', 'already rating this item');
+                $this->dispatch(
+    'show-alert',
+    type: 'error',
+    message: 'already rating this item'
+);
                 return false;
             }
             $rating->user_id = auth()->id();
@@ -91,11 +100,15 @@ class SingleProductReviewComponent extends Component
             $rating->status = 1;
             $rating->update();
             Cache::forget('recent_reviews');
-            $this->alert('success', 'Your review updated successfully');
+            $this->dispatch(
+    'show-alert',
+    type: 'success',
+    message: 'Your review updated successfully'
+);
         }
 
         $this->showForm = false;
-        $this->emit('update_rating');
+        $this->dispatch('update_rating');
     }
 
     public function delete($id)
@@ -109,10 +122,14 @@ class SingleProductReviewComponent extends Component
             $this->rating  = '';
             $this->content = '';
         }
-        $this->emit('update_rating');
+        $this->dispatch('update_rating');
         $this->showForm = true;
         Cache::forget('recent_reviews');
-        $this->alert('success', 'Your review deleted successfully');
+        $this->dispatch(
+    'show-alert',
+    type: 'success',
+    message: 'Your review deleted successfully'
+);
     }
 
     public function render()

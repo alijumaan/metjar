@@ -4,13 +4,10 @@ namespace App\Http\Livewire\Frontend\Header;
 
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class WishlistComponent extends Component
 {
-    use LivewireAlert;
-
     public $wishlistCount;
 
     protected $listeners = [
@@ -19,7 +16,7 @@ class WishlistComponent extends Component
         'move_to_cart' => 'moveToCart'
     ];
 
-    public function mount()
+    public function mount(): void
     {
         $this->wishlistCount();
     }
@@ -27,12 +24,11 @@ class WishlistComponent extends Component
     public function wishlistCount()
     {
         $this->wishlistCount = Cart::instance('wishlist')->count();
-        if (Cart::instance('wishlist')->count() == 0) {
-            $this->emit('update_message_wishlist_not_found');
-        }
+
+        $this->dispatch('update_message_wishlist_not_found');
     }
 
-    public function moveToCart($rowId)
+    public function moveToCart($rowId): void
     {
         $item = Cart::instance('wishlist')->get($rowId);
 
@@ -42,20 +38,29 @@ class WishlistComponent extends Component
 
         if ($duplicate->isNotEmpty()) {
             $this->removeFromWishlist($rowId);
-            $this->alert('warning', 'Product already exist.');
+            $this->dispatch(
+                'show-alert',
+                type: 'warning',
+                message: 'Product already exist.'
+            );
         } else {
             Cart::instance('default')->add($item->id, $item->name, 1, $item->price)
                 ->associate(Product::class);
             $this->removeFromWishlist($rowId);
-            $this->alert('success', 'Added to Cart.');
+            $this->dispatch(
+                'show-alert',
+                type: 'success',
+                message: 'Added to Cart.'
+            );
         }
-        $this->emit('update_cart');
+        $this->dispatch('update_cart');
     }
 
-    public function removeFromWishlist($rowId)
+    public function removeFromWishlist($rowId): void
     {
         Cart::instance('wishlist')->remove($rowId);
-        $this->emit('update_wishlist');
+
+        $this->dispatch('update_wishlist');
     }
 
     public function render()

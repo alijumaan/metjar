@@ -1,5 +1,7 @@
-<tr x-data="{ cartNoFound: @entangle('cartNoFound') }">
-    <td x-show="cartNoFound" class="pl-0 border-light" colspan="5">
-        <p class="text-center">No items found.</p>
-    </td>
+<tr>
+    @if($cartNoFound)
+        <td class="pl-0 border-light text-center" colspan="6">
+            <p class="text-center mb-0">No items found.</p>
+        </td>
+    @endif
 </tr>

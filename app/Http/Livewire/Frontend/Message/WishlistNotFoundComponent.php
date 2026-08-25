@@ -7,19 +7,20 @@ use Livewire\Component;
 
 class WishlistNotFoundComponent extends Component
 {
-    public $wishlistNoFound;
+    public $wishlistNoFound = false;
 
     protected $listeners = [
-        'update_message_wishlist_not_found' => 'mount'
+        'update_message_wishlist_not_found' => 'checkWishlist',
     ];
 
-    public function mount()
+    public function mount(): void
     {
-        $this->wishlistNoFound = false;
+        $this->checkWishlist();
+    }
 
-        if (Cart::instance('wishlist')->count() == 0) {
-            $this->wishlistNoFound = true;
-        }
+    public function checkWishlist(): void
+    {
+        $this->wishlistNoFound = Cart::instance('wishlist')->count() === 0;
     }
 
     public function render()

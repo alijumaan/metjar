@@ -13,7 +13,7 @@ class CartNotFoundComponent extends Component
         'update_message_cart_not_found' => 'mount'
     ];
 
-    public function mount()
+    public function mount(): void
     {
         $this->cartNoFound = false;
 

@@ -3,13 +3,10 @@
 namespace App\Http\Livewire\Frontend\Product;
 
 use App\Services\CartService;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class SingleProductCartComponent extends Component
 {
-    use LivewireAlert;
-
     public $quantity = 1;
     public $product;
 
@@ -30,7 +27,11 @@ class SingleProductCartComponent extends Component
         if ($this->product->quantity > $this->quantity){
             $this->quantity++;
         } else {
-            $this->alert('warning', 'maximum quantity added!');
+            $this->dispatch(
+    'show-alert',
+    type: 'warning',
+    message: 'maximum quantity added!'
+);
         }
     }
 
@@ -38,10 +39,18 @@ class SingleProductCartComponent extends Component
     {
         try {
             (new CartService())->addToList('default', $this->product);
-            $this->emit('update_cart');
-            $this->alert('success', 'added to Cart.');
+            $this->dispatch('update_cart');
+            $this->dispatch(
+    'show-alert',
+    type: 'success',
+    message: 'added to Cart.'
+);
         } catch(\Exception $exception) {
-            $this->alert('warning', $exception->getMessage());
+            $this->dispatch(
+    'show-alert',
+    type: 'warning',
+    message: $exception->getMessage()
+);
         }
     }
 
@@ -49,10 +58,18 @@ class SingleProductCartComponent extends Component
     {
         try {
             (new CartService())->addToList('wishlist', $this->product);
-            $this->emit('update_wishlist');
-            $this->alert('success', 'added to Wishlist.');
+            $this->dispatch('update_wishlist');
+            $this->dispatch(
+    'show-alert',
+    type: 'success',
+    message: 'added to Wishlist.'
+);
         } catch(\Exception $exception) {
-            $this->alert('warning', $exception->getMessage());
+            $this->dispatch(
+    'show-alert',
+    type: 'warning',
+    message: $exception->getMessage()
+);
         }
     }
 

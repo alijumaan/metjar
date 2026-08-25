@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
                 ProductsTableSeeder::class,
                 ProductTagTableSeeder::class,
                 ReviewSeeder::class,
-//                ProductMediaTableSeeder::class,
+                ProductMediaTableSeeder::class,
                 PagesSeeder::class,
                 SettingSeeder::class,
                 ShippingCompanySeeder::class,

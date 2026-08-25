@@ -36,22 +36,39 @@ function getSettingsOf(string $key)
 
 function getNumbersOfCart(): Collection
 {
-    $subtotal = Cart::instance('default')->subtotal();
-    $discount = session()->has('coupon') ? session()->get('coupon')['discount'] : 0.00;
-    $discountCode = session()->has('coupon') ? session()->get('coupon')['code'] : null;
+    $subtotal = (float) str_replace(
+        ',',
+        '',
+        Cart::instance('default')->subtotal()
+    );
+
+    $discount = session()->has('coupon')
+        ? (float) session()->get('coupon')['discount']
+        : 0.00;
+
+    $discountCode = session()->has('coupon')
+        ? session()->get('coupon')['code']
+        : null;
 
     $subtotalAfterDiscount = $subtotal - $discount;
 
-    $tax = config('cart.tax') / 100;
+    $tax = (float) config('cart.tax') / 100;
     $taxText = config('cart.tax') . '%';
 
     $productTaxes = round($subtotalAfterDiscount * $tax, 2);
     $newSubTotal = $subtotalAfterDiscount + $productTaxes;
 
-    $shipping = session()->has('shipping') ? session()->get('shipping')['cost'] : 0.00;
-    $shippingCode = session()->has('shipping') ? session()->get('shipping')['code'] : null;
+    $shipping = session()->has('shipping')
+        ? (float) session()->get('shipping')['cost']
+        : 0.00;
 
-    $total = ($newSubTotal + $shipping) > 0 ? round($newSubTotal + $shipping, 2) : 0.00;
+    $shippingCode = session()->has('shipping')
+        ? session()->get('shipping')['code']
+        : null;
+
+    $total = ($newSubTotal + $shipping) > 0
+        ? round($newSubTotal + $shipping, 2)
+        : 0.00;
 
     return collect([
         'subtotal' => $subtotal,

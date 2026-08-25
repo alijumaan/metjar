@@ -32,10 +32,7 @@
 
     @include('partials.frontend.footer')
 
-    <livewire:scripts/>
     <script src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
-    <x-livewire-alert::flash />
-    <x-livewire-alert::scripts />
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('frontend/js/vendor/modernizr-2.8.3.min.js') }}"></script>
@@ -51,7 +48,7 @@
     <script src="{{ asset('frontend/js/main.js') }}"></script>
     <script src="{{ asset('frontend/js/jquery.magnific-popup.min.js') }}"></script>
     <script src="{{ asset('frontend/js/alert-message.js') }}"></script>
-    <script src="{{ url('https://kit.fontawesome.com/8003f9e0e2.js') }}" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/8003f9e0e2.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -86,6 +83,22 @@
                         return '<div style="font-weight:normal; width:100%" class="list-group-item"><a href="{{url('product')}}/'+data.slug+'">' + data.name + '</a></div></div>'
                     }
                 }
+            });
+        });
+    </script>
+    <livewire:scripts />
+    <script>
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('show-alert', (event) => {
+                Swal.fire({
+                    icon: event.type ?? 'success',
+                    title: event.message ?? '',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 2500,
+                    timerProgressBar: true,
+                });
             });
         });
     </script>

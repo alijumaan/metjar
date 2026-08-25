@@ -3,13 +3,10 @@
 namespace App\Http\Livewire\Frontend\Cart;
 
 use App\Models\Coupon;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class CartTotalComponent extends Component
 {
-    use LivewireAlert;
-
     public $cartSubTotal;
     public $cartTotal;
     public $cartTax;
@@ -32,44 +29,91 @@ class CartTotalComponent extends Component
 
     public function applyDiscount()
     {
-        if (getNumbersOfCart()) {
-            $coupon = Coupon::whereCode($this->couponCode)->whereStatus(true)->first();
-            if (!$coupon) {
-                $this->couponCode = '';
-                $this->alert('error', 'Coupon is invalid');
-            }
+        if (!getNumbersOfCart()) {
+            $this->couponCode = '';
 
-            if ($coupon->greater_than > getNumbersOfCart()->get('subtotal')) {
-                $this->couponCode = '';
-                $this->alert('warning', 'Subtotal must greater than $'. $coupon->greater_than);
-            }
+            $this->dispatch(
+                'show-alert',
+                type: 'error',
+                message: 'No products available in your cart'
+            );
 
-            $couponValue = $coupon->discount($this->cartSubTotal);
-            if ($couponValue < 0) {
-                $this->alert('error', 'product coupon is invalid');
-            }
-
-            session()->put('coupon', [
-                'code' => $coupon->code,
-                'value' => $coupon->value,
-                'discount' => $couponValue
-            ]);
-
-            $this->couponCode = session()->get('coupon')['code'];
-            $this->emit('update_cart');
-            $this->alert('success', 'Coupon is applied successfully');
+            return;
         }
 
-        $this->couponCode = '';
-        $this->alert('error', 'No products available in your cart');
+        $coupon = Coupon::whereCode($this->couponCode)
+            ->whereStatus(true)
+            ->first();
+
+        if (!$coupon) {
+            $this->couponCode = '';
+
+            $this->dispatch(
+                'show-alert',
+                type: 'error',
+                message: 'Coupon is invalid'
+            );
+
+            return;
+        }
+
+        $subtotal = (float) getNumbersOfCart()->get('subtotal');
+        $greaterThan = (float) $coupon->greater_than;
+
+        if ($greaterThan > $subtotal) {
+            $this->couponCode = '';
+
+            $this->dispatch(
+                'show-alert',
+                type: 'warning',
+                message: 'Subtotal must greater than $' . $greaterThan
+            );
+
+            return;
+        }
+
+        $couponValue = (float) $coupon->discount($subtotal);
+
+        if ($couponValue < 0) {
+            $this->couponCode = '';
+
+            $this->dispatch(
+                'show-alert',
+                type: 'error',
+                message: 'Product coupon is invalid'
+            );
+
+            return;
+        }
+
+        session()->put('coupon', [
+            'code' => $coupon->code,
+            'value' => $coupon->value,
+            'discount' => $couponValue,
+        ]);
+
+        $this->couponCode = $coupon->code;
+
+        $this->dispatch('update_cart');
+        $this->dispatch('update_message_cart_not_found');
+
+        $this->dispatch(
+            'show-alert',
+            type: 'success',
+            message: 'Coupon is applied successfully'
+        );
     }
 
     public function removeCoupon()
     {
         session()->remove('coupon');
         $this->couponCode = '';
-        $this->emit('update_cart');
-        $this->alert('success', 'remove coupon successfully');
+        $this->dispatch('update_cart');
+        $this->dispatch(
+    'show-alert',
+    type: 'success',
+    message: 'remove coupon successfully'
+);
     }
 
     public function render()

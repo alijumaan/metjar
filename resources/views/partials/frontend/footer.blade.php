@@ -21,7 +21,7 @@
                                             <i class="pe-7s-call"></i>
                                         </div>
                                         <div class="food-info-content">
-                                            <p>+966 000-000000</p>
+                                            <p>+966 xxx-xxxxx</p>
                                         </div>
                                     </div>
                                     <div class="food-address">
@@ -30,8 +30,7 @@
                                         </div>
                                         <div class="food-info-content">
                                             <p>
-                                                <a href="https://alijumaan.com">alila3883@gmail.com</a> <br>
-                                                <a href="https://alijumaan.com" target="_blank">contact@alijumaan.com</a>
+                                                <span>contact@alialqahtani.sa</span> <br>
                                             </p>
                                         </div>
                                     </div>

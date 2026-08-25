@@ -6,12 +6,10 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\State;
 use App\Models\UserAddress;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class AddressesComponent extends Component
 {
-    use LivewireAlert;
 
     public $showForm = false;
     public $editMode = false;
@@ -75,7 +73,11 @@ class AddressesComponent extends Component
 
         $this->resetForm();
         $this->showForm = false;
-        $this->alert('success', 'Address created successfully');
+        $this->dispatch(
+    'show-alert',
+    type: 'success',
+    message: 'Address created successfully'
+);
     }
 
     public function editAddress($id)
@@ -117,7 +119,11 @@ class AddressesComponent extends Component
 
         $this->resetForm();
         $this->showForm = false;
-        $this->alert('success', 'Address updated successfully');
+        $this->dispatch(
+    'show-alert',
+    type: 'success',
+    message: 'Address updated successfully'
+);
     }
 
     public function deleteAddress($id)
@@ -127,7 +133,11 @@ class AddressesComponent extends Component
             auth()->user()->addresses()->first()->update(['default_address' => true]);
         }
         $address->delete();
-        $this->alert('success', 'Address deleted successfully');
+        $this->dispatch(
+    'show-alert',
+    type: 'success',
+    message: 'Address deleted successfully'
+);
     }
 
     public function resetForm()

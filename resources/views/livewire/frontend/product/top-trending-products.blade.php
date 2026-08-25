@@ -1,4 +1,5 @@
-<div wire:ignore id="all-products" class="product-style-area pt-130 pb-30 wow fadeInUp">
+<div class="container">
+    <div id="all-products" class="product-style-area pt-130 pb-30 wow fadeInUp">
     <div class="section-title-furits text-center mb-95">
         <img src="{{ asset('frontend/img/icon-img/49.png') }}" alt="">
         <h2>TOP TRENDING PRODUCTS</h2>
@@ -15,16 +16,33 @@
                             @else
                                 <img src="{{ asset('img/cartwhite.png' ) }}" alt="">
                             @endif
-                            <div class="product-furit-action">
-                                <a wire:click.prevent="addToCart('{{ $product->id }}')"
-                                   class="furit-animate-left" title="Add To Cart">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </a>
-                                <a wire:click.prevent="addToWishList('{{ $product->id }}')"
-                                   class="furit-animate-right" title="Wishlist">
-                                    <i class="fas fa-heart"></i>
-                                </a>
-                            </div>
+                                <div class="product-furit-action">
+
+                                    <a href="javascript:void(0)"
+                                       wire:click.prevent="addToCart('{{ $product->id }}')"
+                                       class="furit-animate-left metjar-icon"
+                                       title="Add To Cart">
+
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H6"/>
+                                            <circle cx="10" cy="20" r="1.5"/>
+                                            <circle cx="18" cy="20" r="1.5"/>
+                                        </svg>
+
+                                    </a>
+
+                                    <a href="javascript:void(0)"
+                                       wire:click.prevent="addToWishList('{{ $product->id }}')"
+                                       class="furit-animate-right metjar-icon"
+                                       title="Wishlist">
+
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M20.8 8.7c0 5.5-8.8 10.3-8.8 10.3S3.2 14.2 3.2 8.7A4.7 4.7 0 0 1 12 6.1a4.7 4.7 0 0 1 8.8 2.6Z"/>
+                                        </svg>
+
+                                    </a>
+
+                                </div>
                         </div>
                         <div class="product-fruit-content text-center">
                             <h4>
@@ -40,4 +58,4 @@
         </div>
     </div>
 </div>
-
+</div>

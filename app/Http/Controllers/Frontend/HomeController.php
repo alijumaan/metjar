@@ -22,7 +22,19 @@ class HomeController extends Controller
             ->limit(4)
             ->get();
 
-        return view('frontend.index', compact('categories', 'coupon'));
+
+        $heroProducts = Product::query()
+            ->active()
+            ->hasQuantity()
+            ->activeCategory()
+            ->featured()
+            ->with(['firstMedia', 'category'])
+            ->whereHas('media')
+            ->latest()
+            ->take(3)
+            ->get();
+
+        return view('frontend.index', compact('categories', 'coupon', 'heroProducts'));
     }
 
     public function search(Request $request): JsonResponse

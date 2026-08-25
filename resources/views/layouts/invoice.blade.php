@@ -115,7 +115,7 @@
                 <table>
                     <tr>
                         <td class="title">
-                            <img src="{{ base_path('public/frontend/img/logo.png') }}" style="width: 100%; max-width: 100px" />
+                            <img src="{{ base_path('public/frontend/img/metjar.png') }}" style="width: 100%; max-width: 100px" />
                         </td>
                         <td></td>
                         <td>

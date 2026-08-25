@@ -4,13 +4,10 @@ namespace App\Http\Livewire\Frontend\Cart;
 
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class CartItemComponent extends Component
 {
-    use LivewireAlert;
-
     public $item;
     public $itemQuantity = 1;
 
@@ -25,10 +22,14 @@ class CartItemComponent extends Component
             $this->itemQuantity -= 1;
             Cart::instance('default')->update($rowId, $this->itemQuantity);
             if (session()->has('coupon')) {
-                $this->alert('info', 'Add you coupon again');
+                $this->dispatch(
+    'show-alert',
+    type: 'info',
+    message: 'Add you coupon again'
+);
             }
             $this->clearSession();
-            $this->emit('update_cart');
+            $this->dispatch('update_cart');
         }
     }
 
@@ -40,20 +41,34 @@ class CartItemComponent extends Component
             $this->itemQuantity += 1;
             Cart::instance('default')->update($rowId, $this->itemQuantity);
             if (session()->has('coupon')) {
-                $this->alert('info', 'Add you coupon again');
+                $this->dispatch(
+    'show-alert',
+    type: 'info',
+    message: 'Add you coupon again'
+);
             }
             $this->clearSession();
-            $this->emit('update_cart');
+            $this->dispatch('update_cart');
+            $this->dispatch('update_message_cart_not_found');
         } else {
-            $this->alert('warning', 'maximum quantity '. $productQuantity);
+            $this->dispatch(
+                'show-alert',
+                type: 'warning',
+                message: 'maximum quantity ' . $productQuantity
+            );
         }
     }
 
     public function removeFromCart($rowId)
     {
         $this->clearSession();
-        $this->emit('remove_from_cart', $rowId);
-        $this->alert('success', 'Item removed from cart!');
+        $this->dispatch('remove_from_cart', $rowId);
+
+        $this->dispatch(
+            'show-alert',
+            type: 'success',
+            message: 'Item removed from cart!'
+        );
     }
 
     protected function clearSession()
