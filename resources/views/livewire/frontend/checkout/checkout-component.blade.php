@@ -1,187 +1,406 @@
-<div>
-    <div class="row">
-        <div class="col-md-12 mb-3">
-            @if(!session()->has('coupon'))
-                <p>Have a coupon?</p>
-                <form wire:submit.prevent="applyDiscount()">
-                    <p class="checkout-coupon">
-                        <input wire:model="couponCode" type="text" placeholder="Coupon code" required/>
-                        <input type="submit" value="Apply Coupon" />
-                    </p>
-                </form>
-            @endif
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6 col-md-12 col-12">
-            <h2 class="h5 text-uppercase mb-4">Shipping addresses</h2>
-            <div class="row">
+<div class="modern-checkout">
+
+    {{-- Coupon --}}
+    @if(!session()->has('coupon'))
+        <section class="checkout-card checkout-coupon-card">
+
+            <div class="checkout-card-header">
+                <span class="checkout-eyebrow">DISCOUNT</span>
+                <h2>Have a coupon?</h2>
+            </div>
+
+            <form wire:submit.prevent="applyDiscount()" class="modern-coupon-form">
+                <input
+                        wire:model="couponCode"
+                        type="text"
+                        placeholder="Coupon code"
+                        required
+                >
+
+                <button type="submit">
+                    Apply Coupon
+                </button>
+            </form>
+
+        </section>
+    @endif
+
+
+    <div class="checkout-grid">
+
+        {{-- LEFT --}}
+        <div class="checkout-details">
+
+            {{-- Shipping Address --}}
+            <section class="checkout-card">
+
+                <div class="checkout-card-header">
+                    <span class="checkout-eyebrow">01</span>
+                    <h2>Shipping Address</h2>
+                </div>
+
                 @forelse($addresses as $address)
-                    <div class="col-6 form-group">
-                        <div class="custom-control custom-radio">
-                            <input
+
+                    <label
+                            for="address-{{ $address->id }}"
+                            class="checkout-option
+                        {{ intval($userAddressId) == $address->id ? 'is-selected' : '' }}"
+                    >
+
+                        <input
                                 type="radio"
                                 id="address-{{ $address->id }}"
-                                class="custom-control-input"
+                                name="shipping_address"
                                 wire:model="userAddressId"
                                 wire:click="getShippingCompanies()"
-                                {{ intval($userAddressId) == $address->id ? 'checked' : '' }}
-                                value="{{ $address->id }}">
+                                value="{{ $address->id }}"
+                        >
 
-                            <label for="address-{{ $address->id }}" class="custom-control-label text-small">
-                                <b>{{ $address->address_title }}</b>
-                                <small>
-                                    {{ $address->address }}<br>
-                                    {{ $address->country->name }} - {{ $address->state->name }}- {{ $address->city->name }}
+                        <span class="checkout-radio"></span>
 
-                                </small>
-                            </label>
-                        </div>
-                    </div>
+                        <span class="checkout-option-content">
+
+                            <strong>
+                                {{ $address->address_title }}
+                            </strong>
+
+                            <small>
+                                {{ $address->address }}
+                            </small>
+
+                            <small>
+                                {{ $address->country->name }}
+                                -
+                                {{ $address->state->name }}
+                                -
+                                {{ $address->city->name }}
+                            </small>
+
+                        </span>
+
+                    </label>
+
                 @empty
-                    <div class="col-6 form-group">
-                        <p class="text-danger">No addresses found</p>
-                        <a class="btn btn-dark" href="{{ route('user.addresses') }}">Add Your Address</a>
+
+                    <div class="checkout-empty">
+                        <p>No addresses found</p>
+
+                        <a href="{{ route('user.addresses') }}">
+                            Add Your Address
+                        </a>
                     </div>
+
                 @endforelse
-            </div>
+
+            </section>
+
+
+            {{-- Shipping Method --}}
             @if($userAddressId)
-                <h2 class="h5 text-uppercase mb-4">Shipping way</h2>
-                <div class="row">
-                    @forelse($shippingCompanies as $shippingCompany)
-                        <div class="col-6 form-group">
-                            <div class="custom-control custom-radio">
+
+                <section class="checkout-card">
+
+                    <div class="checkout-card-header">
+                        <span class="checkout-eyebrow">02</span>
+                        <h2>Shipping Method</h2>
+                    </div>
+
+                    <div class="checkout-options">
+
+                        @forelse($shippingCompanies as $shippingCompany)
+
+                            <label
+                                    for="shipping-company-{{ $shippingCompany->id }}"
+                                    class="checkout-option
+                                {{ intval($shippingCompanyId) == $shippingCompany->id ? 'is-selected' : '' }}"
+                            >
+
                                 <input
-                                    type="radio"
-                                    id="shipping-company-{{ $shippingCompany->id }}"
-                                    class="custom-control-input"
-                                    wire:model="shippingCompanyId"
-                                    wire:click="storeShippingCost()"
-                                    {{ intval($shippingCompanyId) == $shippingCompany->id ? 'checked' : '' }}
-                                    value="{{ $shippingCompany->id }}">
-                                <label for="shipping-company-{{ $shippingCompany->id }}"
-                                       class="custom-control-label text-small">
-                                    <b>{{ $shippingCompany->name }}</b>
+                                        type="radio"
+                                        id="shipping-company-{{ $shippingCompany->id }}"
+                                        name="shipping_company"
+                                        wire:model="shippingCompanyId"
+                                        wire:click="storeShippingCost()"
+                                        value="{{ $shippingCompany->id }}"
+                                >
+
+                                <span class="checkout-radio"></span>
+
+                                <span class="checkout-option-content">
+
+                                    <strong>
+                                        {{ $shippingCompany->name }}
+                                    </strong>
+
                                     <small>
-                                        {{ $shippingCompany->description }} (${{ $shippingCompany->cost }})
+                                        {{ $shippingCompany->description }}
                                     </small>
-                                </label>
+
+                                </span>
+
+                                <span class="checkout-option-price">
+                                    ${{ $shippingCompany->cost }}
+                                </span>
+
+                            </label>
+
+                        @empty
+
+                            <div class="checkout-empty">
+                                <p>No shipping companies found</p>
                             </div>
-                        </div>
-                    @empty
-                        <p>No shipping companies found</p>
-                    @endforelse
-                </div>
-            @endif
-            @if($userAddressId && $shippingCompanyId)
-                <h2 class="h5 text-uppercase mb-4">Payment way</h2>
-                <div class="row">
-                    @forelse($paymentMethods as $paymentMethod)
-                        <div class="col-6 form-group">
-                            <div class="custom-control custom-radio">
-                                <input
-                                    type="radio"
-                                    id="payment-method-{{ $paymentMethod->id }}"
-                                    class="custom-control-input"
-                                    wire:model="paymentMethodId"
-                                    wire:click="getPaymentMethod()"
-                                    {{ intval($paymentMethodId) == $paymentMethod->id ? 'checked' : '' }}
-                                    value="{{ $paymentMethod->id }}">
-                                <label for="payment-method-{{ $paymentMethod->id }}"
-                                       class="custom-control-label text-small">
-                                    <b>{{ $paymentMethod->name }}</b>
-                                </label>
-                            </div>
-                        </div>
-                    @empty
-                        <p>No payment way found</p>
-                    @endforelse
-                </div>
+
+                        @endforelse
+
+                    </div>
+
+                </section>
+
             @endif
 
-            @if($userAddressId && $shippingCompanyId && $paymentMethodId)
-                @if(\Str::lower($paymentMethodCode) == 'ppex')
-                    <form action="{{ route('payment.store') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="userAddressId" value="{{ old('userAddressId', $userAddressId) }}"
-                               class="form-control">
-                        <input type="hidden" name="shippingCompanyId"
-                               value="{{ old('shippingCompanyId', $shippingCompanyId) }}" class="form-control">
-                        <input type="hidden" name="paymentMethodId" value="{{ old('paymentMethodId', $paymentMethodId) }}"
-                               class="form-control">
-                        <button type="submit" name="submit" class="btn btn-sm btn-primary btn-block uppercase">
-                            PayPay Place order
-                        </button>
-                    </form>
-                @endif
-                    @if(\Str::lower($paymentMethodCode) == 'mada')
-                        <form action="{{ route('checkout.charge_request') }}">
-                            @csrf
-                            <input type="hidden" name="userAddressId" value="{{ old('userAddressId', $userAddressId) }}"
-                                   class="form-control">
-                            <input type="hidden" name="shippingCompanyId"
-                                   value="{{ old('shippingCompanyId', $shippingCompanyId) }}" class="form-control">
-                            <input type="hidden" name="paymentMethodId" value="{{ old('paymentMethodId', $paymentMethodId) }}"
-                                   class="form-control">
-                            <button type="submit" name="submit" class="btn btn-sm btn-dark btn-block uppercase">
-                                Mada Place order
-                            </button>
-                        </form>
-                    @endif
+
+            {{-- Payment --}}
+            @if($userAddressId && $shippingCompanyId)
+
+                <section class="checkout-card">
+
+                    <div class="checkout-card-header">
+                        <span class="checkout-eyebrow">03</span>
+                        <h2>Payment Method</h2>
+                    </div>
+
+                    <div class="checkout-options">
+
+                        @forelse($paymentMethods as $paymentMethod)
+
+                            <label
+                                    for="payment-method-{{ $paymentMethod->id }}"
+                                    class="checkout-option
+                                {{ intval($paymentMethodId) == $paymentMethod->id ? 'is-selected' : '' }}"
+                            >
+
+                                <input
+                                        type="radio"
+                                        id="payment-method-{{ $paymentMethod->id }}"
+                                        name="payment_method"
+                                        wire:model="paymentMethodId"
+                                        wire:click="getPaymentMethod()"
+                                        value="{{ $paymentMethod->id }}"
+                                >
+
+                                <span class="checkout-radio"></span>
+
+                                <span class="checkout-option-content">
+
+                                    <strong>
+                                        {{ $paymentMethod->name }}
+                                    </strong>
+
+                                </span>
+
+                            </label>
+
+                        @empty
+
+                            <div class="checkout-empty">
+                                <p>No payment methods found</p>
+                            </div>
+
+                        @endforelse
+
+                    </div>
+
+                </section>
+
             @endif
+
+
+            {{-- Place Order --}}
+            @if($userAddressId && $shippingCompanyId && $paymentMethodId)
+
+                <section class="checkout-place-order">
+
+                    @if(\Str::lower($paymentMethodCode) == 'ppex')
+
+                        <form action="{{ route('payment.store') }}" method="POST">
+                            @csrf
+
+                            <input
+                                    type="hidden"
+                                    name="userAddressId"
+                                    value="{{ old('userAddressId', $userAddressId) }}"
+                            >
+
+                            <input
+                                    type="hidden"
+                                    name="shippingCompanyId"
+                                    value="{{ old('shippingCompanyId', $shippingCompanyId) }}"
+                            >
+
+                            <input
+                                    type="hidden"
+                                    name="paymentMethodId"
+                                    value="{{ old('paymentMethodId', $paymentMethodId) }}"
+                            >
+
+                            <button type="submit" class="checkout-submit">
+                                <span>PayPal</span>
+                                <span>Place Order</span>
+
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M5 12h13"></path>
+                                    <path d="m13 6 6 6-6 6"></path>
+                                </svg>
+                            </button>
+
+                        </form>
+
+                    @endif
+
+
+                    @if(\Str::lower($paymentMethodCode) == 'mada')
+
+                        <form action="{{ route('checkout.charge_request') }}" method="GET">
+
+                            @csrf
+
+                            <input
+                                    type="hidden"
+                                    name="userAddressId"
+                                    value="{{ old('userAddressId', $userAddressId) }}"
+                            >
+
+                            <input
+                                    type="hidden"
+                                    name="shippingCompanyId"
+                                    value="{{ old('shippingCompanyId', $shippingCompanyId) }}"
+                            >
+
+                            <input
+                                    type="hidden"
+                                    name="paymentMethodId"
+                                    value="{{ old('paymentMethodId', $paymentMethodId) }}"
+                            >
+
+                            <button type="submit" class="checkout-submit">
+
+                                <span>Mada</span>
+                                <span>Place Order</span>
+
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M5 12h13"></path>
+                                    <path d="m13 6 6 6-6 6"></path>
+                                </svg>
+
+                            </button>
+
+                        </form>
+
+                    @endif
+
+                </section>
+
+            @endif
+
         </div>
-        <div class="col-lg-6 col-md-12 col-12">
-            <div class="your-order">
-                <h4 class="mx-5">Your order</h4>
-                <div class="your-order-table table-responsive">
-                    <table>
-                        <tbody>
-                        <tr>
-                            <th class="product-name">
-                                <strong>Subtotal</strong>
-                            </th>
-                            <th class="product-total">${{ $cartSubTotal }}</th>
-                        </tr>
-                        @if(session()->has('coupon'))
-                            <tr>
-                                <th class="product-name">
-                                    <strong>Discount</strong>
-                                    <small>({{ getNumbersOfCart()->get('discountCode') }})</small><br>
-                                    <a wire:click.prevent="removeCoupon()"
-                                              class="btn btn-link btn-sm text-decoration-none text-danger">
-                                            <small>Remove coupon</small>
-                                        </a>
-                                </th>
-                                <th class="product-total">- ${{ $cartDiscount }}</th>
-                            </tr>
-                        @endif
-                        @if(session()->has('shipping'))
-                            <tr>
-                                <th class="product-name">
-                                    <strong>Shipping</strong>
-                                    <small>({{ getNumbersOfCart()->get('shippingCode') }})</small>
-                                </th>
-                                <th class="product-total">${{ $cartShipping }}</th>
-                            </tr>
-                        @endif
-                        <tr>
-                            <th class="product-name">
-                                <strong>Tax</strong>
-                            </th>
-                            <th class="product-total">${{ $cartTax }}</th>
-                        </tr>
-                        <tr class="order-total">
-                            <th>
-                                <strong>Total</strong>
-                            </th>
-                            <td>
-                                <strong><span>${{ $cartTotal }}</span></strong>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+
+
+        {{-- RIGHT --}}
+        <aside class="checkout-summary">
+
+            <div class="checkout-summary-inner">
+
+                <div class="checkout-summary-header">
+
+                    <span class="checkout-eyebrow">
+                        ORDER SUMMARY
+                    </span>
+
+                    <h2>Your Order</h2>
+
                 </div>
+
+
+                <div class="checkout-summary-items">
+
+                    <div class="checkout-summary-row">
+                        <span>Subtotal</span>
+                        <strong>${{ $cartSubTotal }}</strong>
+                    </div>
+
+
+                    @if(session()->has('coupon'))
+
+                        <div class="checkout-summary-row checkout-discount">
+
+                            <div>
+                                <span>Discount</span>
+
+                                <small>
+                                    ({{ getNumbersOfCart()->get('discountCode') }})
+                                </small>
+
+                                <a
+                                        wire:click.prevent="removeCoupon()"
+                                        href="#"
+                                >
+                                    Remove coupon
+                                </a>
+                            </div>
+
+                            <strong>
+                                - ${{ $cartDiscount }}
+                            </strong>
+
+                        </div>
+
+                    @endif
+
+
+                    @if(session()->has('shipping'))
+
+                        <div class="checkout-summary-row">
+
+                            <div>
+                                <span>Shipping</span>
+
+                                <small>
+                                    ({{ getNumbersOfCart()->get('shippingCode') }})
+                                </small>
+                            </div>
+
+                            <strong>
+                                ${{ $cartShipping }}
+                            </strong>
+
+                        </div>
+
+                    @endif
+
+
+                    <div class="checkout-summary-row">
+                        <span>Tax</span>
+                        <strong>${{ $cartTax }}</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="checkout-summary-total">
+
+                    <span>Total</span>
+
+                    <strong>
+                        ${{ $cartTotal }}
+                    </strong>
+
+                </div>
+
             </div>
-        </div>
+
+        </aside>
+
     </div>
+
 </div>
+

@@ -2,7 +2,7 @@
 @section('title', 'Reset Password')
 @section('content')
 
-    <div class="breadcrumb-area pt-5 pb-5" style="background-color: #09c6a2">
+    <div class="breadcrumb-area pt-5 pb-5" style="background-color: #0D0D0D;">
         <div class="container">
             <div class="breadcrumb-content text-center">
                 <h2>Reset Password</h2>

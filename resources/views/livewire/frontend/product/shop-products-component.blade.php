@@ -1,144 +1,257 @@
-<div>
-    <div class="shop-product-wrapper res-xl res-xl-btn">
-        <div class="shop-bar-area">
-            <div class="shop-bar pb-60">
-                <div class="shop-found-selector">
-                    <div class="shop-found">
-                        <p class="small">
-                            Showing {{ $products->firstItem() }} - {{ $products->lastItem() }} of {{ $products->total() }} results
-                        </p>
-                    </div>
-                    <div wire:ignore class="shop-selector">
-                        <label>Sort By :</label>
-                        <select wire:model="sortingBy">
-                            <option value="default">Default sorting</option>
-                            <option value="popularity">Popularity</option>
-                            <option value="low-high">Price: Low to High</option>
-                            <option value="high-low">Price: High to Low</option>
-                        </select>
+<div class="modern-shop-products">
+    {{-- =====================================================
+         Shop Toolbar
+         ===================================================== --}}
 
-                    </div>
-                </div>
-                <div class="shop-filter-tab">
-                    <div class="shop-tab nav" role=tablist>
-                        <a class="active" href="#grid-sidebar1" data-toggle="tab" role="tab" aria-selected="true">
-                            <i class="fas fa-border-all"></i>
-                        </a>
-                        <a href="#grid-sidebar2" data-toggle="tab" role="tab" aria-selected="false">
-                            <i class="fas fa-bars"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="shop-product-content tab-content">
-                <div id="grid-sidebar1" class="tab-pane fade active show">
-                    <div class="row">
-                        @forelse($products as $product)
-                            <div class="col-lg-4 col-xl-3 col-md-6">
-                                <div class="product-fruit-wrapper mb-60">
-                                    <div class="product-fruit-img">
-                                        @if($product->firstMedia)
-                                            <img src="{{ asset('storage/images/products/' . $product->firstMedia->file_name ) }}"
-                                                 alt="{{ $product->name }}">
-                                        @else
-                                            <img src="{{ asset('img/cartwhite.png' ) }}" alt="">
-                                        @endif
-                                        <div class="product-furit-action">
-                                            <a wire:click.prevent="addToCart('{{ $product->id }}')"
-                                               class="furit-animate-left" title="Add To Cart">
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </a>
-                                            <a wire:click.prevent="addToWishList('{{ $product->id }}')"
-                                               class="furit-animate-right" title="Wishlist">
-                                                <i class="fas fa-heart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-fruit-content text-center">
-                                        <h4>
-                                            <a href="{{route('product.show', $product->slug)}}">{{ $product->name }}</a>
-                                        </h4>
-                                        <span>${{ $product->price }}</span>
-                                        <div>
-                                            @if($product->tags->count() > 0)
-                                                @foreach($product->tags as $tag)
-                                                    <label for="" class="small">
-                                                        <a href="{{ route('shop.tag', $tag->slug) }}">
-                                                            {{ $tag->name }}
-                                                            <span>{{ $loop->last ? '' : ',' }}</span>
-                                                        </a>
-                                                    </label>
-                                                @endforeach
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @empty
-                            <p>No products found.</p>
-                        @endforelse
-                    </div>
-                </div>
-                <div id="grid-sidebar2" class="tab-pane fade">
-                    <div class="row">
-                        @forelse($products as $product)
-                            <div class="col-lg-12">
-                                <div class="product-wrapper mb-30 single-product-list product-list-right-pr mb-60">
-                                    <div class="product-img list-img-width">
-                                        @if($product->firstMedia)
-                                            <img src="{{ asset('storage/images/products/' . $product->firstMedia->file_name ) }}"
-                                                 alt="{{ $product->name }}" width="150">
-                                        @else
-                                            <img src="{{ asset('img/cartwhite.png' ) }}" alt="{{ $product->name }}" style="width: 100%;">
-                                        @endif
-                                    </div>
-                                    <div class="product-content-list">
-                                        <div class="product-list-info">
-                                            <h4>
-                                                <a href="{{route('product.show', $product->slug)}}">
-                                                    {{ $product->name }}
-                                                </a>
-                                            </h4>
-                                            <span>${{ $product->price }}</span>
-                                            @if($product->tags->count() > 0)
-                                                @foreach($product->tags as $tag)
-                                                    <label>
-                                                        <a href="{{ route('shop.tag', $tag->slug) }}">
-                                                            {{ $tag->name }}<span>{{ $loop->last ? '' : ',' }}</span>
-                                                        </a>
-                                                    </label>
-                                                @endforeach
-                                            @endif
-                                            <p>{{ $product->description }}</p>
-                                        </div>
-                                        <div class="product-list-cart-wishlist">
-                                            <div class="product-list-cart">
-                                                <a wire:click="addToCart('{{ $product->id }}')"
-                                                   class="btn-hover list-btn-style" title="Add To Cart" style="cursor: pointer">
-                                                    add to cart
-                                                </a>
-                                            </div>
-                                            <div class="product-list-look">
-                                                <a wire:click="addToWishList('{{ $product->id }}')"
-                                                   class="btn-hover list-btn-wishlist"
-                                                   title="Wishlist" style="cursor: pointer">
-                                                    <i class='far fa-heart'></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    <div class="modern-shop-toolbar">
 
-                        @empty
-                            <h3 style="">No products found.</h3>
-                        @endforelse
-                    </div>
-                </div>
-            </div>
+        <div class="modern-shop-results">
+
+            @if($products->total() > 0)
+                Showing
+                {{ $products->firstItem() }}
+                -
+                {{ $products->lastItem() }}
+                of
+                {{ $products->total() }}
+                results
+            @else
+                No products found
+            @endif
+
         </div>
+
+
+        <div class="modern-shop-sort">
+
+            <label for="shopSorting">
+                Sort By
+            </label>
+
+            <select
+                    id="shopSorting"
+                    wire:model.live="sortingBy"
+            >
+                <option value="default">
+                    Default sorting
+                </option>
+
+                <option value="popularity">
+                    Popularity
+                </option>
+
+                <option value="low-high">
+                    Price: Low to High
+                </option>
+
+                <option value="high-low">
+                    Price: High to Low
+                </option>
+            </select>
+
+        </div>
+
     </div>
-    <div class="d-flex justify-content-center">
-        {!! $products->appends(request()->all())->onEachSide(1)->links() !!}
+
+
+    {{-- =====================================================
+         Products Grid
+         ===================================================== --}}
+
+    <div class="modern-products-grid">
+
+        @forelse($products as $product)
+
+            <article
+                    class="modern-product-card"
+                    wire:key="product-{{ $product->id }}"
+            >
+
+                {{-- Product Image --}}
+
+                <div class="modern-product-image">
+
+                    <a
+                            href="{{ route('product.show', $product->slug) }}"
+                            class="modern-product-image-link"
+                    >
+
+                        @if($product->firstMedia)
+
+                            <img
+                                    src="{{ asset('storage/images/products/' . $product->firstMedia->file_name) }}"
+                                    alt="{{ $product->name }}"
+                                    loading="lazy"
+                            >
+
+                        @else
+
+                            <img
+                                    src="{{ asset('img/cartwhite.png') }}"
+                                    alt="{{ $product->name }}"
+                                    loading="lazy"
+                            >
+
+                        @endif
+
+                    </a>
+
+
+                    {{-- Product Actions --}}
+
+                    <div class="modern-product-actions">
+
+                        <button
+                                type="button"
+                                wire:click.prevent="addToCart('{{ $product->id }}')"
+                                class="modern-product-action cart-action"
+                                title="Add To Cart"
+                                aria-label="Add {{ $product->name }} to cart"
+                        >
+
+                            <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                            >
+                                <path d="M4 5h2l1.5 10h9.8l2-7H7"></path>
+                                <circle cx="10" cy="19" r="1.4"></circle>
+                                <circle cx="17" cy="19" r="1.4"></circle>
+                            </svg>
+
+                        </button>
+
+
+                        <button
+                                type="button"
+                                wire:click.prevent="addToWishList('{{ $product->id }}')"
+                                class="modern-product-action wishlist-action"
+                                title="Wishlist"
+                                aria-label="Add {{ $product->name }} to wishlist"
+                        >
+
+                            <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                            >
+                                <path d="M20.8 8.8c0 5.2-8.8 10-8.8 10s-8.8-4.8-8.8-10A4.8 4.8 0 0 1 8 4c1.4 0 2.9.7 4 2 1.1-1.3 2.6-2 4-2a4.8 4.8 0 0 1 4.8 4.8Z"></path>
+                            </svg>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                {{-- Product Content --}}
+
+                <div class="modern-product-content">
+
+                    <h3 class="modern-product-title">
+
+                        <a href="{{ route('product.show', $product->slug) }}">
+                            {{ $product->name }}
+                        </a>
+
+                    </h3>
+
+
+                    <div class="modern-product-bottom">
+
+                    <span class="modern-product-price">
+                        ${{ $product->price }}
+                    </span>
+
+
+                        <a
+                                href="{{ route('product.show', $product->slug) }}"
+                                class="modern-product-view"
+                                aria-label="View {{ $product->name }}"
+                                title="View Product"
+                        >
+
+                            <svg
+                                    viewBox="0 0 24 24"
+                                    aria-hidden="true"
+                            >
+                                <path d="M5 12h13"></path>
+                                <path d="m13 6 6 6-6 6"></path>
+                            </svg>
+
+                        </a>
+
+                    </div>
+
+
+                    {{-- Tags --}}
+
+                    @if($product->tags->count() > 0)
+
+                        <div class="modern-product-tags">
+
+                            @foreach($product->tags as $tag)
+
+                                <a
+                                        href="{{ route('shop.tag', $tag->slug) }}"
+                                >
+                                    {{ $tag->name }}
+                                </a>
+
+                                @if(!$loop->last)
+                                    <span>,</span>
+                                @endif
+
+                            @endforeach
+
+                        </div>
+
+                    @endif
+
+                </div>
+
+            </article>
+
+        @empty
+
+            <div class="modern-products-empty">
+
+                <div class="modern-products-empty-icon">
+
+                    <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                    >
+                        <path d="M6 8h12l1 12H5L6 8Z"></path>
+                        <path d="M9 8a3 3 0 0 1 6 0"></path>
+                    </svg>
+
+                </div>
+
+                <h3>
+                    No products found
+                </h3>
+
+                <p>
+                    Try changing your filters or search criteria.
+                </p>
+
+            </div>
+
+        @endforelse
+
     </div>
+
+
+    {{-- =====================================================
+         Pagination
+         ===================================================== --}}
+    @if($products->hasPages())
+        <div class="modern-shop-pagination">
+            {!! $products
+                ->appends(request()->all())
+                ->onEachSide(1)
+                ->links()
+            !!}
+        </div>
+    @endif
 </div>

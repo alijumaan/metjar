@@ -17,6 +17,6 @@ class PageController extends Controller
             });
         }
 
-        return view('frontend.pages.show', compact('static_page'));
+        return view('frontend.static_page', compact('static_page'));
     }
 }

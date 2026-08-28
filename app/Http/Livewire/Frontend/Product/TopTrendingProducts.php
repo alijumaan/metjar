@@ -76,7 +76,7 @@ class TopTrendingProducts extends Component
                 'price'
             )
                 ->with('firstMedia')
-                ->inRandomOrder()
+//                ->inRandomOrder()
                 ->featured()
                 ->active()
                 ->hasQuantity()

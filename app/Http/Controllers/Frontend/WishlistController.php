@@ -9,6 +9,6 @@ class WishlistController extends Controller
 {
     public function index()
     {
-        return view('frontend.wishlist.index');
+        return view('frontend.wishlist');
     }
 }

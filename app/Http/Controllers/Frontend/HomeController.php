@@ -22,7 +22,6 @@ class HomeController extends Controller
             ->limit(4)
             ->get();
 
-
         $heroProducts = Product::query()
             ->active()
             ->hasQuantity()
@@ -34,7 +33,31 @@ class HomeController extends Controller
             ->take(3)
             ->get();
 
-        return view('frontend.index', compact('categories', 'coupon', 'heroProducts'));
+        if ($heroProducts->count() < 3) {
+
+            $existingIds = $heroProducts->pluck('id');
+
+            $fallbackProducts = Product::query()
+                ->active()
+                ->hasQuantity()
+                ->activeCategory()
+                ->with(['firstMedia', 'category'])
+                ->whereHas('media')
+                ->whereNotIn('id', $existingIds)
+                ->latest()
+                ->take(3 - $heroProducts->count())
+                ->get();
+
+            $heroProducts = $heroProducts
+                ->concat($fallbackProducts);
+
+        }
+
+        return view('frontend.home', [
+            'coupon' => $coupon,
+            'categories' => $categories,
+            'heroProducts' => $heroProducts,
+        ]);
     }
 
     public function search(Request $request): JsonResponse

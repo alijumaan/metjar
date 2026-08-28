@@ -8,6 +8,6 @@ class ShopController extends Controller
 {
     public function index($slug = null)
     {
-        return view('frontend.shop.index', compact('slug'));
+        return view('frontend.shop', compact('slug'));
     }
 }

@@ -1,153 +1,84 @@
-<footer class="footer-area fruits-footer">
-    <div class="food-footer-bottom pt-80 pb-70 black-bg-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-lg-4">
-                    <div class="footer-widget">
-                        <div class="food-about">
-                            <p>Online Shop</p>
-                            <div class="food-about-info">
-                                <div class="food-info-wrapper">
-                                    <div class="food-address">
-                                        <div class="food-info-icon">
-                                            <i class="pe-7s-map-marker"></i>
-                                        </div>
-                                        <div class="food-info-content">
-                                            <p>Website address here</p>
-                                        </div>
-                                    </div>
-                                    <div class="food-address">
-                                        <div class="food-info-icon">
-                                            <i class="pe-7s-call"></i>
-                                        </div>
-                                        <div class="food-info-content">
-                                            <p>+966 xxx-xxxxx</p>
-                                        </div>
-                                    </div>
-                                    <div class="food-address">
-                                        <div class="food-info-icon">
-                                            <i class="pe-7s-chat"></i>
-                                        </div>
-                                        <div class="food-info-content">
-                                            <p>
-                                                <span>contact@alialqahtani.sa</span> <br>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-2">
-                    <div class="footer-widget mt-50">
-                        <h3 class="footer-widget-title-6">Options</h3>
-                        <div class="food-widget-content">
-                            <ul>
-                                <li><a href="{{ route('cart.index') }}"><img
-                                            src="{{ asset('frontend/img/icon-img/41.png') }}" alt="hhhhhh"> Cart</a></li>
-                                <li>
-                                    <a href="{{ route('user.dashboard') }}"><img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">
-                                        My Account</a>
-                                </li>
-                                @guest
-                                    @if (route('register'))
-                                        <li>
-                                            <a href="{{ route('register') }}">
-                                                <img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">
-                                                Register
-                                            </a>
-                                        </li>
-                                    @endif
-                                @endguest
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="footer-widget mt-50">
-                        <h3 class="footer-widget-title-6">Information</h3>
-                        <div class="food-widget-content">
-                            <ul>
-                                <li>
-                                    <a href="{{ route('contact.index') }}">
-                                        <img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">
-                                        About
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('contact.index') }}">
-                                        <img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">
-                                        Contact
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('page.show', 'privacy-policy') }}">
-                                        <img src="{{ asset('frontend/img/icon-img/41.png') }}" alt="">
-                                        Privacy Policy
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+<footer class="luxury-footer">
+
+    <div class="container">
+
+        <div class="luxury-footer-main">
+
+            {{-- Brand --}}
+            <a href="{{ url('/') }}" class="luxury-footer-logo">
+                Online Shop
+            </a>
+
+            {{-- Links --}}
+            <nav class="luxury-footer-links">
+
+                <a href="{{ url('/') }}">
+                    Shop
+                </a>
+
+                <a href="{{ route('cart.index') }}">
+                    Cart
+                </a>
+
+                <a href="{{ route('user.dashboard') }}">
+                    Account
+                </a>
+
+                <a href="{{ route('contact.index') }}">
+                    Contact
+                </a>
+
+                <a href="{{ route('page.show', 'privacy-policy') }}">
+                    Privacy
+                </a>
+
+            </nav>
+
+            {{-- Social --}}
+            <div class="luxury-footer-social">
+
+                <a href="#" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="18" height="18" rx="5"/>
+                        <circle cx="12" cy="12" r="4"/>
+                        <circle cx="17.5" cy="6.5" r="1"/>
+                    </svg>
+                </a>
+
+                <a href="#" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M14 8h3V4h-3c-3.3 0-5 1.7-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.7.3-1 1-1Z"/>
+                    </svg>
+                </a>
+
+                <a href="mailto:alila3883@gmail.com"
+                   aria-label="Email">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="5" width="18" height="14" rx="2"/>
+                        <path d="m3 7 9 6 9-6"/>
+                    </svg>
+                </a>
+
             </div>
+
         </div>
-    </div>
-    <div class="footer-middle black-bg-2 pt-35 pb-40">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4">
-                    <div class="footer-services-wrapper mb-30">
-                        <div class="footer-services-icon">
-                            <i class="pe-7s-car"></i>
-                        </div>
-                        <div class="footer-services-content">
-                            <h3>Free Shipping</h3>
-                            <p>Free Shipping on Bangladesh</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <div class="footer-services-wrapper mb-30">
-                        <div class="footer-services-icon">
-                            <i class="pe-7s-shield"></i>
-                        </div>
-                        <div class="footer-services-content">
-                            <h3>Money Guarentee</h3>
-                            <p>Free Shipping on Bangladesh</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <div class="footer-services-wrapper mb-30">
-                        <div class="footer-services-icon">
-                            <i class="pe-7s-headphones"></i>
-                        </div>
-                        <div class="footer-services-content">
-                            <h3>Online Support</h3>
-                            <p>Free Shipping on Bangladesh</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center">
-                <img src="{{ asset('frontend/img/icon-img/3.png') }}" alt="">
-            </div>
+
+        <div class="luxury-footer-bottom">
+
+            <span>
+                © {{ date('Y') }} Online Shop
+            </span>
+
+            <span class="luxury-footer-line"></span>
+
+            <a href="https://alialqahtani.sa"
+               target="_blank"
+               rel="noopener">
+                alialqahtani.sa
+            </a>
+
         </div>
+
     </div>
-    <div class="food-copyright black-bg-6 ptb-30">
-        <div class="container text-center">
-            <p class="copyright text-center">
-                ©
-                <script>
-                    document.write(new Date().getFullYear())
-                </script>
-                Created by
-                <a href="https://alialqahtani.sa" target="_blank" class="text-primary">alialqahtani.sa</a>
-            </p>
-        </div>
-    </div>
+
 </footer>
-
-

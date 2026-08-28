@@ -18,17 +18,37 @@
         <span class="amount" style="font-size: 16px;">${{ $cartItem->model->price }}</span>
     </td>
     <td class="product-quantity" style="font-size: 16px;">
-        <div class="d-flex align-items-center justify-content-between">
-            <span class="text-uppercase text-gray headings-font-family"></span>
-            <a wire:click.prevent="decreaseQuantity('{{ $cartItem->rowId }}')"
-                style="cursor: pointer;">
-                <i class="fas fa-caret-left"></i>
-            </a>
-            <span class="text-center">{{ $itemQuantity }}</span>
-            <a wire:click.prevent="increaseQuantity('{{ $cartItem->rowId }}', '{{ $cartItem->id }}')"
-                style="cursor: pointer;">
-                <i class="fas fa-caret-right"></i>
-            </a>
+        <div class="modern-cart-quantity">
+
+            <button
+                    type="button"
+                    wire:click.prevent="decreaseQuantity('{{ $cartItem->rowId }}')"
+                    class="modern-quantity-button"
+                    aria-label="Decrease quantity"
+            >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 12h12"></path>
+                </svg>
+            </button>
+
+
+            <span class="modern-quantity-value">
+        {{ $itemQuantity }}
+    </span>
+
+
+            <button
+                    type="button"
+                    wire:click.prevent="increaseQuantity('{{ $cartItem->rowId }}', '{{ $cartItem->id }}')"
+                    class="modern-quantity-button"
+                    aria-label="Increase quantity"
+            >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 6v12"></path>
+                    <path d="M6 12h12"></path>
+                </svg>
+            </button>
+
         </div>
     </td>
     <td>

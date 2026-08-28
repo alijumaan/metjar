@@ -1090,37 +1090,3 @@
 .product-furit-action .metjar-icon:hover svg {
     stroke: #ffffff !important;
 }
-
-/* =========================================================
-   MODERN HEADER
-========================================================= */
-
-.header-bottom.furits-header {
-    background: rgba(255, 255, 255, 0.96);
-    border-bottom: 1px solid #eeeeee;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-    z-index: 999;
-}
-
-.furits-header .menu-style-2 nav ul li a {
-    color: #111827;
-    font-weight: 600;
-    transition: all 0.25s ease;
-}
-
-.furits-header .menu-style-2 nav ul li a:hover {
-    color: #6d28d9;
-}
-
-.furits-header .furits-login-cart,
-.furits-header .furits-login-cart a {
-    color: #111827 !important;
-}
-
-.furits-header .furits-login-cart i {
-    color: #111827 !important;
-}
-
-.furits-header .furits-login-cart a:hover i {
-    color: #6d28d9 !important;
-}

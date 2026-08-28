@@ -1,81 +1,186 @@
-<div class="shop-sidebar mr-50">
-    <div class="sidebar-widget mb-40">
-        <h3 class="sidebar-title">CATEGORIES</h3>
-        @forelse($shop_categories_menu as $category)
-            <div class="py-2 px-4 bg-dark text-white mb-3">
-                <strong class="small text-uppercase font-weight-bold">
-                    <a class="text-decoration-none text-white" href="{{ route('shop.index', $category->slug) }}">
-                        {{ $category->name }}
-                    </a>
-                </strong>
-            </div>
-            <ul class="list-unstyled small text-muted pl-lg-4 font-weight-normal">
-                @forelse($category->appearedChildren as $sub_category)
-                    <li class="mb-2">
-                        <a class="reset-anchor" href="{{ route('shop.index', $sub_category->slug) }}">
-                            {{ $sub_category->name }}
-                        </a>
-                    </li>
-                @empty
-                @endforelse
-            </ul>
-        @empty
-        @endforelse
-    </div>
-    <div class="sidebar-widget mb-40">
-        <h3 class="sidebar-title">TAGS</h3>
-        <hr style="margin-top: 0; margin-bottom: 10px; border: solid 1px;">
-        <div class="price_filter">
-{{--            <div id="slider-range"></div>--}}
-            <div class="price_slider_amount">
-                <div class="sidebar-categories">
-                    <ul>
-                        @foreach($shop_tags_menu as $tag)
-                            <span style="background: #ebebeb none repeat scroll 0 0; color: #333;
-                            display: inline-block; font-size: 12px; line-height: 20px; margin:
-                            5px 5px 0 0; padding: 5px 15px; text-transform: capitalize;">
-                                <a href="{{ route('shop.tag', $tag->slug) }}">
-                                    {{ $tag->name }}
-                                    ({{ $tag->products_count }})
-                                </a>
-                            </span>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
+<div class="store-sidebar">
+
+    {{-- =====================================================
+         CATEGORIES
+         ===================================================== --}}
+    <div class="store-sidebar-widget">
+
+        <div class="store-sidebar-heading">
+            <span>SHOP</span>
+            <h3>Categories</h3>
         </div>
+
+        <div class="store-sidebar-categories">
+
+            @forelse($shop_categories_menu as $category)
+
+                <div class="store-sidebar-category">
+
+                    <a href="{{ route('shop.index', $category->slug) }}"
+                       class="store-sidebar-category-main">
+
+                        <span>{{ $category->name }}</span>
+
+                        <svg viewBox="0 0 24 24"
+                             aria-hidden="true">
+                            <path d="M9 6l6 6-6 6"/>
+                        </svg>
+
+                    </a>
+
+                    @if($category->appearedChildren->count())
+
+                        <div class="store-sidebar-subcategories">
+
+                            @foreach($category->appearedChildren as $sub_category)
+
+                                <a href="{{ route('shop.index', $sub_category->slug) }}">
+                                    {{ $sub_category->name }}
+                                </a>
+
+                            @endforeach
+
+                        </div>
+
+                    @endif
+
+                </div>
+
+            @empty
+
+                <p class="store-sidebar-empty">
+                    No categories found.
+                </p>
+
+            @endforelse
+
+        </div>
+
     </div>
-    <div class="sidebar-widget mb-40">
-        <h3 class="sidebar-title">RECENT REVIEWS</h3>
-        <hr style="margin-top: 0; margin-bottom: 10px; border: solid 1px;">
-        <ul>
-            @foreach($recent_reviews as $recent_review)
-                <li>
-                    <div class="post-wrapper d-flex">
-                        <div class="mb-2">
-                            <img src="{{ get_gravatar($recent_review->email, 50) }}" alt="{{ $recent_review->name }}">
-                        </div>
-                        <div class="ml-3 p-0">
-                            @if(isset($recent_review->product->slug))
-                                <p>
-                                    <span class="">{{ $recent_review->user->full_name }}</span>
-                                    <small> review on :
-                                        {{ $recent_review->product->name }}
-                                    </small>
-                                </p>
-                                <p>{!! \Illuminate\Support\Str::limit($recent_review->review, 30, '...') !!}</p>
-                            @else
 
-                                <h6><span class="text-success">{{ $recent_review->name }}</span>
-                                    <small> review : </small>
-                                </h6>
-                                <p>{!! \Illuminate\Support\Str::limit($recent_review->review, 30, '...') !!}</p>
 
-                            @endif
-                        </div>
+    {{-- =====================================================
+         TAGS
+         ===================================================== --}}
+    <div class="store-sidebar-widget">
+
+        <div class="store-sidebar-heading">
+            <span>EXPLORE</span>
+            <h3>Tags</h3>
+        </div>
+
+        <div class="store-sidebar-tags">
+
+            @forelse($shop_tags_menu as $tag)
+
+                <a href="{{ route('shop.tag', $tag->slug) }}"
+                   class="store-sidebar-tag">
+
+                    <span>{{ $tag->name }}</span>
+
+                    <small>{{ $tag->products_count }}</small>
+
+                </a>
+
+            @empty
+
+                <p class="store-sidebar-empty">
+                    No tags found.
+                </p>
+
+            @endforelse
+
+        </div>
+
+    </div>
+
+
+    {{-- =====================================================
+         RECENT REVIEWS
+         ===================================================== --}}
+    <div class="store-sidebar-widget">
+
+        <div class="store-sidebar-heading">
+            <span>COMMUNITY</span>
+            <h3>Recent Reviews</h3>
+        </div>
+
+        <div class="store-sidebar-reviews">
+
+            @forelse($recent_reviews as $recent_review)
+
+                <div class="store-sidebar-review">
+
+                    <div class="store-sidebar-review-avatar">
+
+                        <img
+                                src="{{ get_gravatar($recent_review->email, 50) }}"
+                                alt="{{ $recent_review->name }}"
+                        >
+
                     </div>
-                </li>
-            @endforeach
-        </ul>
+
+                    <div class="store-sidebar-review-content">
+
+                        @if(isset($recent_review->product->slug))
+
+                            <div class="store-sidebar-review-meta">
+
+                                <strong>
+                                    {{ $recent_review->user->full_name ?? $recent_review->name }}
+                                </strong>
+
+                                <span>
+                                    reviewed
+                                </span>
+
+                            </div>
+
+                            <a
+                                    href="{{ route('product.show', $recent_review->product->slug) }}"
+                                    class="store-sidebar-review-product"
+                            >
+                                {{ $recent_review->product->name }}
+                            </a>
+
+                        @else
+
+                            <div class="store-sidebar-review-meta">
+
+                                <strong>
+                                    {{ $recent_review->name }}
+                                </strong>
+
+                                <span>
+                                    review
+                                </span>
+
+                            </div>
+
+                        @endif
+
+                        <p>
+                            {!! \Illuminate\Support\Str::limit(
+                                $recent_review->review,
+                                65,
+                                '...'
+                            ) !!}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            @empty
+
+                <p class="store-sidebar-empty">
+                    No reviews found.
+                </p>
+
+            @endforelse
+
+        </div>
+
     </div>
+
 </div>
