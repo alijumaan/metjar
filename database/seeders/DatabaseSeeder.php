@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        if (app()->environment('local')) {
+//        if (app()->environment('local')) {
             $this->call([
                 WorldSeeder::class,
                 WorldStatusSeeder::class,
@@ -36,6 +36,6 @@ class DatabaseSeeder extends Seeder
                 OrderSeeder::class,
                 LinkSeeder::class,
             ]);
-        }
+//        }
     }
 }
