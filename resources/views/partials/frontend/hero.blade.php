@@ -78,24 +78,15 @@
                     <span>↓</span>
 
                 </a>
-
             </div>
-
         </div>
-
 
         {{-- Products --}}
         @if(isset($heroProducts) && $heroProducts->count())
-
             <div class="store-hero-products">
-
                 @foreach($heroProducts as $index => $product)
-
                     @if($product->firstMedia)
-
-                        <a
-                                href="{{ route('product.show', $product->slug) }}"
-                                class="store-hero-product hero-product-{{ $index + 1 }}">
+                        <a href="javascript:void(0);" class="store-hero-product hero-product-{{ $index + 1 }}">
 
                             <div class="hero-product-number">
 
@@ -103,18 +94,13 @@
 
                             </div>
 
-
                             <div class="hero-product-image">
-
                                 <img
                                         src="{{ asset('storage/images/products/' . $product->firstMedia->file_name) }}"
                                         alt="{{ $product->name }}">
-
                             </div>
 
-
                             <div class="hero-product-info">
-
                                 <small>
                                     {{ $product->category->name ?? 'Collection' }}
                                 </small>
@@ -127,19 +113,12 @@
                                     {{ number_format($product->price, 2) }}
                                     SAR
                                 </span>
-
                             </div>
-
                         </a>
-
                     @endif
-
                 @endforeach
-
             </div>
-
         @endif
-
     </div>
 
 

@@ -12,7 +12,7 @@
             {{-- Links --}}
             <nav class="luxury-footer-links">
 
-                <a href="{{ url('/') }}">
+                <a href="{{ route('shop.index') }}">
                     Shop
                 </a>
 
@@ -37,7 +37,7 @@
             {{-- Social --}}
             <div class="luxury-footer-social">
 
-                <a href="#" aria-label="Instagram">
+                <a href="https://www.instagram.com/alhbbash" target="_blank" aria-label="Instagram">
                     <svg viewBox="0 0 24 24">
                         <rect x="3" y="3" width="18" height="18" rx="5"/>
                         <circle cx="12" cy="12" r="4"/>
@@ -45,9 +45,9 @@
                     </svg>
                 </a>
 
-                <a href="#" aria-label="Facebook">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M14 8h3V4h-3c-3.3 0-5 1.7-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.7.3-1 1-1Z"/>
+                <a href="https://x.com/alila_q" target="_blank" aria-label="X">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M18.244 2H21.5l-7.11 8.13L22.76 22h-6.65l-5.21-6.81L4.94 22H1.68l7.61-8.7L1.24 2H8.06l4.71 6.23L18.244 2Zm-1.17 17.86h1.8L6.95 4.02H5.02l12.05 15.84Z"/>
                     </svg>
                 </a>
 
