@@ -7535,3 +7535,283 @@ Mobile
     }
 
 }
+
+/* =========================================================
+   RELATED PRODUCTS — PREMIUM ACTIONS
+========================================================= */
+
+.product-area .product-fruit-img {
+    position: relative;
+    overflow: hidden;
+    background: #f6f6f4;
+    border-radius: 18px;
+}
+
+
+/* =========================================================
+   ACTION WRAPPER
+========================================================= */
+
+.product-area .product-furit-action {
+    position: absolute;
+
+    top: 50%;
+    right: 18px;
+    bottom: auto;
+
+    z-index: 5;
+
+    display: flex !important;
+    flex-direction: column;
+
+    gap: 8px;
+
+    padding: 0;
+
+    background: transparent;
+
+    border: 0;
+
+    box-shadow: none;
+
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    transform: translate(20px, -50%);
+
+    opacity: 0;
+
+    transition:
+            opacity .35s ease,
+            transform .4s cubic-bezier(.2,.8,.2,1);
+}
+
+
+/* تظهر عند المرور */
+
+.product-area .product-fruit-wrapper:hover .product-furit-action {
+    opacity: 1;
+
+    transform: translate(0, -50%);
+}
+
+
+/* =========================================================
+   BASE ACTION
+========================================================= */
+
+.product-area .product-furit-action .metjar-icon {
+    display: flex !important;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    transition:
+            transform .25s ease,
+            background .25s ease,
+            color .25s ease,
+            box-shadow .25s ease;
+}
+
+
+/* =========================================================
+   CART
+========================================================= */
+
+.product-area .product-action-cart {
+
+    width: 48px;
+    height: 48px;
+
+    padding: 0;
+
+    border-radius: 50% !important;
+
+    background: #111 !important;
+
+    color: #fff !important;
+
+    box-shadow:
+            0 8px 25px rgba(0,0,0,.20);
+}
+
+.product-area .product-action-cart svg {
+
+    width: 19px;
+    height: 19px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.6;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.product-area .product-action-cart span {
+    display: none;
+}
+
+.product-area .product-action-cart:hover {
+
+    background: var(--store-gold) !important;
+
+    color: #fff !important;
+
+    transform: scale(1.08);
+}
+
+
+/* =========================================================
+   WISHLIST
+========================================================= */
+
+.product-area .product-action-wishlist {
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50% !important;
+
+    background: rgba(255,255,255,.96) !important;
+
+    color: #111 !important;
+
+    box-shadow:
+            0 8px 25px rgba(0,0,0,.15);
+}
+
+.product-area .product-action-wishlist svg {
+
+    width: 19px;
+    height: 19px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.6;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.product-area .product-action-wishlist:hover {
+
+    color: #b94b58 !important;
+
+    transform: scale(1.08);
+
+    background: #fff !important;
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.product-area .product-fruit-img > img {
+
+    width: 100%;
+    height: 285px;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+            transform .7s cubic-bezier(.2,.8,.2,1);
+}
+
+.product-area .product-fruit-wrapper:hover
+.product-fruit-img > img {
+
+    transform: scale(1.035);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 575px) {
+
+    .product-area .product-fruit-img {
+
+        border-radius: 13px;
+    }
+
+    .product-area .product-fruit-img > img {
+
+        height: 180px;
+    }
+
+
+    /*
+     * في الجوال لا نستخدم hover
+     * ونضع الأزرار بشكل صغير أسفل الصورة
+     */
+
+    .product-area .product-furit-action {
+
+        top: auto;
+        right: 8px;
+        bottom: 8px;
+
+        flex-direction: row;
+
+        gap: 6px;
+
+        opacity: 1;
+
+        transform: none !important;
+
+        padding: 0;
+    }
+
+
+    /* Cart */
+
+    .product-area .product-action-cart {
+
+        width: 36px;
+        height: 36px;
+    }
+
+    .product-area .product-action-cart svg {
+
+        width: 16px;
+        height: 16px;
+    }
+
+
+    /* Wishlist */
+
+    .product-area .product-action-wishlist {
+
+        width: 36px;
+        height: 36px;
+    }
+
+    .product-area .product-action-wishlist svg {
+
+        width: 16px;
+        height: 16px;
+    }
+
+
+    /* Remove heavy shadows on mobile */
+
+    .product-area .product-action-cart,
+    .product-area .product-action-wishlist {
+
+        box-shadow:
+                0 5px 15px rgba(0,0,0,.16);
+    }
+}

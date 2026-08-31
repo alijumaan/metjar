@@ -3,15 +3,11 @@
 @section('title', $product->name)
 
 @section('content')
-
     <main class="store-product-page">
-
         <div class="store-container">
-
             {{-- =====================================================
                  PRODUCT MAIN
                  ===================================================== --}}
-
             <div class="store-product-main">
 
                 {{-- =================================================
@@ -97,11 +93,9 @@
 
                 </div>
 
-
                 {{-- =================================================
                      PRODUCT INFO
                      ================================================= --}}
-
                 <div class="store-product-info">
 
                     {{-- Category --}}
@@ -260,15 +254,11 @@
 
             </div>
 
-
             {{-- =====================================================
                  DESCRIPTION / REVIEWS
                  ===================================================== --}}
-
             <div class="store-product-details">
-
                 <div class="store-product-details-nav">
-
                     <button
                             type="button"
                             class="store-product-details-tab is-active"
@@ -279,7 +269,6 @@
                             ({{ $product->approved_reviews_count }})
                         </span>
                     </button>
-
                     <button
                             type="button"
                             class="store-product-details-tab"
@@ -287,65 +276,45 @@
                     >
                         Description
                     </button>
-
                 </div>
-
 
                 {{-- Description --}}
                 <div
                         class="store-product-details-panel"
                         data-product-panel="description"
                 >
-
                     <div class="store-product-details-content">
-
                         {!! $product->details !!}
-
                     </div>
-
                 </div>
-
 
                 {{-- Reviews --}}
                 <div
                         class="store-product-details-panel is-active"
                         data-product-panel="reviews"
                 >
-
                     <div class="store-product-reviews">
-
                         <livewire:frontend.product.single-product-review-component
                                 :product="$product"
                         />
-
                     </div>
-
                 </div>
-
             </div>
-
-        </div>
-
 
         {{-- =========================================================
              RELATED PRODUCTS
              ========================================================= --}}
 
-        <div class="store-product-related">
-
-            <livewire:frontend.product.related-products-component
-                    :relatedProducts="$relatedProducts"
-            />
-
+            <div class="store-product-related">
+                <livewire:frontend.product.related-products-component
+                        :relatedProducts="$relatedProducts"
+                />
+            </div>
         </div>
-
     </main>
-
 @endsection
 
-
 @push('scripts')
-
     <script>
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -446,5 +415,4 @@
         });
 
     </script>
-
 @endpush
