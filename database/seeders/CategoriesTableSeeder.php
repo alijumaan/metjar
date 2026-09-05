@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 
 class CategoriesTableSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         $categories = [
             'Electronics' => [
@@ -58,17 +58,27 @@ class CategoriesTableSeeder extends Seeder
 
         foreach ($categories as $parentName => $children) {
 
-            $parent = Category::create([
-                'name' => $parentName,
-                'status' => true,
-            ]);
+            $parent = Category::updateOrCreate(
+                [
+                    'name' => $parentName,
+                    'parent_id' => null,
+                ],
+                [
+                    'status' => true,
+                ]
+            );
 
             foreach ($children as $childName) {
-                Category::create([
-                    'name' => $childName,
-                    'status' => true,
-                    'parent_id' => $parent->id,
-                ]);
+
+                Category::updateOrCreate(
+                    [
+                        'name' => $childName,
+                        'parent_id' => $parent->id,
+                    ],
+                    [
+                        'status' => true,
+                    ]
+                );
             }
         }
     }

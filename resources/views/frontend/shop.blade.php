@@ -12,30 +12,21 @@
 
                 {{-- Shop Header --}}
                 <div class="store-section-heading shop-page-heading">
+
                     <div>
                         <span>SHOP</span>
                         <h2>All Products</h2>
                     </div>
+
                 </div>
 
 
-                {{-- Shop Layout --}}
-                <div class="shop-layout">
+                {{-- Products --}}
+                <div class="shop-products">
 
-                    {{-- Sidebar --}}
-                    <aside class="shop-sidebar">
-                        @include('partials.frontend.shop.sidebar')
-                    </aside>
-
-
-                    {{-- Products --}}
-                    <div class="shop-products">
-
-                        <livewire:frontend.product.shop-products-component
-                                :slug="$slug"
-                        />
-
-                    </div>
+                    <livewire:frontend.product.shop-products-component
+                            :slug="$slug"
+                    />
 
                 </div>
 

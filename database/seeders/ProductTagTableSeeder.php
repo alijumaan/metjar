@@ -8,48 +8,116 @@ use Illuminate\Database\Seeder;
 
 class ProductTagTableSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         $tags = Tag::pluck('id', 'name');
 
         $productTags = [
-            'Apple iPhone 16 Pro 256GB' => ['Apple'],
-            'Samsung Galaxy S25 Ultra 256GB' => ['Samsung'],
-            'Apple MacBook Air M3 15-inch' => ['Apple', 'Mac'],
-            'Dell XPS 13' => ['Dell'],
-            'Sony WH-1000XM5' => ['Sony'],
-            'Apple AirPods Pro 2' => ['Apple'],
-            'JBL Charge 5' => ['JBL'],
-            'Apple Watch Series 10' => ['Apple'],
-            'Samsung Galaxy Watch 7' => ['Samsung'],
-            'Logitech MX Master 3S' => ['Logitech'],
-            'Logitech MX Keys S' => ['Logitech'],
-            'Samsung T7 Portable SSD 1TB' => ['Samsung'],
-            'Anker PowerCore 20,000mAh' => ['Anker'],
-            'PlayStation 5 Slim' => ['PlayStation', 'Sony'],
-            'Xbox Series X' => ['Xbox', 'Microsoft'],
-            'Razer BlackShark V2 Pro' => ['Razer'],
-            'Corsair K70 RGB Pro' => ['Corsair', 'Razer'],
-            'Xiaomi Robot Vacuum S10' => ['Xiaomi'],
-            'DeLonghi Hot & Cold Coffee Machine' => [],
-            'Apple MagSafe Charger' => ['Apple'],
+
+            'Apple AirPods Pro 2' => [
+                'Apple',
+            ],
+
+            'Sony WH-1000XM5' => [
+                'Sony',
+            ],
+
+            'Samsung Galaxy S25 Ultra' => [
+                'Samsung',
+            ],
+
+            'Apple MacBook Air M3' => [
+                'Apple',
+                'Mac',
+            ],
+
+            'Logitech K380 Keyboard' => [
+                'Logitech',
+            ],
+
+            'JBL Charge 5' => [
+                'JBL',
+            ],
+
+            'SanDisk Ultra 128GB' => [
+                'SanDisk',
+            ],
+
+            'Apple Watch Series 10' => [
+                'Apple',
+            ],
+
+            'Casio G-Shock GA-2100' => [
+                'Casio',
+            ],
+
+            'Nike Air Max 270' => [
+                'Nike',
+            ],
+
+            'Adidas Ultraboost Light' => [
+                'Adidas',
+            ],
+
+            'Nike Air Force 1' => [
+                'Nike',
+            ],
+
+            'Adidas Stan Smith' => [
+                'Adidas',
+            ],
+
+            "Levi's 501 Original Jeans" => [
+                'Levi’s',
+            ],
+
+            'Nike Sportswear Hoodie' => [
+                'Nike',
+            ],
+
+            'Zara Basic T-Shirt' => [
+                'Zara',
+            ],
+
+            'Adidas Essentials Hoodie' => [
+                'Adidas',
+            ],
+
+            'Nike Sportswear Kids Set' => [
+                'Nike',
+            ],
+
+            'Samsung Galaxy Buds3 Pro' => [
+                'Samsung',
+            ],
+
+            'Apple Magic Keyboard' => [
+                'Apple',
+            ],
         ];
 
         foreach ($productTags as $productName => $tagNames) {
 
-            $product = Product::where('name', $productName)->first();
+            $product = Product::where(
+                'name',
+                $productName
+            )->first();
 
             if (!$product) {
                 continue;
             }
 
             $tagIds = collect($tagNames)
-                ->map(fn ($tag) => $tags[$tag] ?? null)
+                ->map(fn ($tagName) => $tags[$tagName] ?? null)
                 ->filter()
                 ->values()
                 ->toArray();
 
             $product->tags()->sync($tagIds);
         }
+
+        $this->command?->info(
+            'Product tags synced successfully.'
+        );
     }
 }

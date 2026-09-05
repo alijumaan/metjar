@@ -1,13 +1,18 @@
 <div class="modern-shop-products">
+
+
     {{-- =====================================================
-         Shop Toolbar
-         ===================================================== --}}
+     Shop Toolbar
+     ===================================================== --}}
 
     <div class="modern-shop-toolbar">
+
+        {{-- Results --}}
 
         <div class="modern-shop-results">
 
             @if($products->total() > 0)
+
                 Showing
                 {{ $products->firstItem() }}
                 -
@@ -15,39 +20,91 @@
                 of
                 {{ $products->total() }}
                 results
+
             @else
+
                 No products found
+
             @endif
 
         </div>
 
 
-        <div class="modern-shop-sort">
+        {{-- Controls --}}
 
-            <label for="shopSorting">
-                Sort By
-            </label>
+        <div class="modern-shop-controls">
 
-            <select
-                    id="shopSorting"
-                    wire:model.live="sortingBy"
+            {{-- Clear Filters --}}
+
+            <a
+                    href="{{ route('shop.index') }}"
+                    class="modern-shop-clear"
             >
-                <option value="default">
-                    Default sorting
-                </option>
+                Clear Filters
+            </a>
 
-                <option value="popularity">
-                    Popularity
-                </option>
+            {{-- Filter By --}}
 
-                <option value="low-high">
-                    Price: Low to High
-                </option>
+            <div class="modern-shop-filter">
 
-                <option value="high-low">
-                    Price: High to Low
-                </option>
-            </select>
+                <button
+                        type="button"
+                        class="modern-shop-control"
+                        onclick="this.closest('.modern-shop-filter').classList.toggle('is-open')"
+                >
+
+            <span>
+                Filter By
+            </span>
+
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
+
+                </button>
+
+
+                <div class="modern-shop-filter-menu">
+
+                    @include('partials.frontend.shop.sidebar')
+
+                </div>
+
+            </div>
+
+
+            {{-- Sort By --}}
+
+            <div class="modern-shop-sort">
+
+                <label for="shopSorting">
+                    Sort By
+                </label>
+
+                <select
+                        id="shopSorting"
+                        wire:model.live="sortingBy"
+                >
+
+                    <option value="default">
+                        Default sorting
+                    </option>
+
+                    <option value="popularity">
+                        Popularity
+                    </option>
+
+                    <option value="low-high">
+                        Price: Low to High
+                    </option>
+
+                    <option value="high-low">
+                        Price: High to Low
+                    </option>
+
+                </select>
+
+            </div>
 
         </div>
 

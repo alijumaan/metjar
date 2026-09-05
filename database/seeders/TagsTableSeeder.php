@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 
 class TagsTableSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         $tags = [
             'Apple',
@@ -30,12 +30,26 @@ class TagsTableSeeder extends Seeder
             'Nintendo',
             'PlayStation',
             'Xbox',
+
+            // New brands
+            'Mac',
+            'Nike',
+            'Adidas',
+            'Casio',
+            'Levi’s',
+            'Zara',
+            'SanDisk',
+            'DeLonghi',
         ];
 
         foreach ($tags as $tag) {
-            Tag::create([
-                'name' => $tag,
-            ]);
+
+            Tag::updateOrCreate(
+                [
+                    'name' => $tag,
+                ],
+                []
+            );
         }
     }
 }

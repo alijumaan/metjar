@@ -1,4 +1,4 @@
-<div class="store-sidebar">
+<div class="store-sidebar shop-filter-content">
 
     {{-- =====================================================
          CATEGORIES
@@ -16,17 +16,19 @@
 
                 <div class="store-sidebar-category">
 
-                    <a href="{{ route('shop.index', $category->slug) }}"
-                       class="store-sidebar-category-main">
+                    <a
+                            href="{{ route('shop.index', $category->slug) }}"
+                            class="store-sidebar-category-main"
+                    >
 
                         <span>{{ $category->name }}</span>
 
-                        <svg viewBox="0 0 24 24"
-                             aria-hidden="true">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M9 6l6 6-6 6"/>
                         </svg>
 
                     </a>
+
 
                     @if($category->appearedChildren->count())
 
@@ -34,7 +36,9 @@
 
                             @foreach($category->appearedChildren as $sub_category)
 
-                                <a href="{{ route('shop.index', $sub_category->slug) }}">
+                                <a
+                                        href="{{ route('shop.index', $sub_category->slug) }}"
+                                >
                                     {{ $sub_category->name }}
                                 </a>
 
@@ -73,8 +77,10 @@
 
             @forelse($shop_tags_menu as $tag)
 
-                <a href="{{ route('shop.tag', $tag->slug) }}"
-                   class="store-sidebar-tag">
+                <a
+                        href="{{ route('shop.tag', $tag->slug) }}"
+                        class="store-sidebar-tag"
+                >
 
                     <span>{{ $tag->name }}</span>
 
@@ -86,95 +92,6 @@
 
                 <p class="store-sidebar-empty">
                     No tags found.
-                </p>
-
-            @endforelse
-
-        </div>
-
-    </div>
-
-
-    {{-- =====================================================
-         RECENT REVIEWS
-         ===================================================== --}}
-    <div class="store-sidebar-widget">
-
-        <div class="store-sidebar-heading">
-            <span>COMMUNITY</span>
-            <h3>Recent Reviews</h3>
-        </div>
-
-        <div class="store-sidebar-reviews">
-
-            @forelse($recent_reviews as $recent_review)
-
-                <div class="store-sidebar-review">
-
-                    <div class="store-sidebar-review-avatar">
-
-                        <img
-                                src="{{ get_gravatar($recent_review->email, 50) }}"
-                                alt="{{ $recent_review->name }}"
-                        >
-
-                    </div>
-
-                    <div class="store-sidebar-review-content">
-
-                        @if(isset($recent_review->product->slug))
-
-                            <div class="store-sidebar-review-meta">
-
-                                <strong>
-                                    {{ $recent_review->user->full_name ?? $recent_review->name }}
-                                </strong>
-
-                                <span>
-                                    reviewed
-                                </span>
-
-                            </div>
-
-                            <a
-                                    href="{{ route('product.show', $recent_review->product->slug) }}"
-                                    class="store-sidebar-review-product"
-                            >
-                                {{ $recent_review->product->name }}
-                            </a>
-
-                        @else
-
-                            <div class="store-sidebar-review-meta">
-
-                                <strong>
-                                    {{ $recent_review->name }}
-                                </strong>
-
-                                <span>
-                                    review
-                                </span>
-
-                            </div>
-
-                        @endif
-
-                        <p>
-                            {!! \Illuminate\Support\Str::limit(
-                                $recent_review->review,
-                                65,
-                                '...'
-                            ) !!}
-                        </p>
-
-                    </div>
-
-                </div>
-
-            @empty
-
-                <p class="store-sidebar-empty">
-                    No reviews found.
                 </p>
 
             @endforelse
