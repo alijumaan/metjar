@@ -8,17 +8,24 @@
             <div>
 
                 <span>
-                    DISCOVER
+                    {{ __('home.categories.eyebrow') }}
                 </span>
 
                 <h2>
-                    Shop by category
+                    {{ __('home.categories.title') }}
                 </h2>
 
             </div>
 
+
             <a href="{{ route('shop.index') }}">
-                VIEW ALL →
+
+                {{ __('home.categories.view_all') }}
+
+                <span class="section-arrow">
+                    →
+                </span>
+
             </a>
 
         </div>
@@ -60,7 +67,9 @@
                         </h3>
 
                         <b>
-                            SHOP →
+                            {{ __('home.categories.shop') }}
+
+                            <span class="category-arrow">→</span>
                         </b>
 
                     </div>

@@ -7,33 +7,37 @@
             <div>
 
                 <span>
-                    STAY IN THE LOOP
+                    {{ __('home.newsletter.eyebrow') }}
                 </span>
 
                 <h2>
-                    Don't miss what's next.
+                    {{ __('home.newsletter.title') }}
                 </h2>
 
                 <p>
-                    New products, exclusive offers and fresh drops.
+                    {{ __('home.newsletter.description') }}
                 </p>
 
             </div>
 
 
-            <form class="store-newsletter-form">
+            <form class="store-newsletter-form" action="javascript:void(0);">
 
                 <input
                         type="email"
-                        placeholder="Your email address"
-                        required>
+                        placeholder="{{ __('home.newsletter.email_placeholder') }}"
+                        required
+                >
 
                 <button type="submit">
-                    JOIN →
+
+                    {{ __('home.newsletter.join') }}
+
+                    <span class="newsletter-arrow">→</span>
+
                 </button>
 
             </form>
-
         </div>
 
     </div>

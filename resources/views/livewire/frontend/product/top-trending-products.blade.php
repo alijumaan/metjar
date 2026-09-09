@@ -3,7 +3,9 @@
 
         <div class="section-title-furits text-center mb-95">
             <img src="{{ asset('frontend/img/icon-img/49.png') }}" alt="">
-            <h2>TOP TRENDING PRODUCTS</h2>
+            <h2>
+                {{ __('home.trending_products.title') }}
+            </h2>
         </div>
 
         <div class="container">
@@ -44,8 +46,8 @@
                                             type="button"
                                             wire:click.prevent="addToWishList('{{ $product->id }}')"
                                             class="modern-product-action wishlist-action"
-                                            title="Add to Wishlist"
-                                            aria-label="Add to Wishlist"
+                                            title="{{ __('home.trending_products.add_to_wishlist') }}"
+                                            aria-label="{{ __('home.trending_products.add_to_wishlist') }}"
                                     >
                                         <svg viewBox="0 0 24 24" aria-hidden="true">
                                             <path d="M20.8 8.7c0 5.5-8.8 10.3-8.8 10.3S3.2 14.2 3.2 8.7A4.7 4.7 0 0 1 12 6.1a4.7 4.7 0 0 1 8.8 2.6Z"/>
@@ -56,8 +58,8 @@
                                             type="button"
                                             wire:click.prevent="addToCart('{{ $product->id }}')"
                                             class="modern-product-action cart-action"
-                                            title="Add to Cart"
-                                            aria-label="Add to Cart"
+                                            title="{{ __('home.trending_products.add_to_cart') }}"
+                                            aria-label="{{ __('home.trending_products.add_to_cart') }}"
                                     >
                                         <svg viewBox="0 0 24 24" aria-hidden="true">
                                             <path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H6"/>
@@ -88,7 +90,7 @@
                                     <a
                                             href="{{ route('product.show', $product->slug) }}"
                                             class="modern-product-view"
-                                            aria-label="View Product"
+                                            aria-label="{{ __('home.trending_products.view_product') }}"
                                     >
                                         <svg viewBox="0 0 24 24">
                                             <path d="M5 12h14"/>
@@ -108,7 +110,9 @@
 
                     <div class="col-12">
                         <div class="modern-products-empty">
-                            <p>No products found.</p>
+                            <p>
+                                {{ __('home.trending_products.no_products') }}
+                            </p>
                         </div>
                     </div>
 

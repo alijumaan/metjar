@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Registration')
+@section('title', __('register.create_account'))
 
 @section('content')
 
@@ -12,9 +12,9 @@
 
                 {{-- Header --}}
                 <div class="modern-auth-heading">
-                    <span>ACCOUNT</span>
-                    <h1>Create Account</h1>
-                    <p>Register a new account and start shopping with us.</p>
+                    <span>{{ __('register.account') }}</span>
+                    <h1>{{ __('register.create_account') }}</h1>
+                    <p>{{ __('register.register_subtitle') }}</p>
                 </div>
 
 
@@ -24,8 +24,8 @@
                     <div class="modern-auth-card">
 
                         <div class="modern-auth-card-header">
-                            <span class="modern-auth-label">REGISTER</span>
-                            <h2>Create your account</h2>
+                            <span class="modern-auth-label">{{ __('register.register_label') }}</span>
+                            <h2>{{ __('register.register_title') }}</h2>
                         </div>
 
 
@@ -37,12 +37,11 @@
 
                             @csrf
 
-
                             {{-- First Name --}}
                             <div class="modern-auth-field">
 
                                 <label for="first_name">
-                                    First Name
+                                    {{ __('register.first_name') }}
                                 </label>
 
                                 <input
@@ -50,14 +49,12 @@
                                         type="text"
                                         name="first_name"
                                         value="{{ old('first_name') }}"
-                                        placeholder="Enter your first name"
+                                        placeholder="{{ __('register.first_name_placeholder') }}"
                                         autocomplete="given-name"
                                 >
 
                                 @error('first_name')
-                                <span class="modern-auth-error">
-                                        {{ $message }}
-                                    </span>
+                                <span class="modern-auth-error">{{ $message }}</span>
                                 @enderror
 
                             </div>
@@ -67,7 +64,7 @@
                             <div class="modern-auth-field">
 
                                 <label for="last_name">
-                                    Last Name
+                                    {{ __('register.last_name') }}
                                 </label>
 
                                 <input
@@ -75,14 +72,12 @@
                                         type="text"
                                         name="last_name"
                                         value="{{ old('last_name') }}"
-                                        placeholder="Enter your last name"
+                                        placeholder="{{ __('register.last_name_placeholder') }}"
                                         autocomplete="family-name"
                                 >
 
                                 @error('last_name')
-                                <span class="modern-auth-error">
-                                        {{ $message }}
-                                    </span>
+                                <span class="modern-auth-error">{{ $message }}</span>
                                 @enderror
 
                             </div>
@@ -92,7 +87,7 @@
                             <div class="modern-auth-field">
 
                                 <label for="username">
-                                    Username
+                                    {{ __('register.username') }}
                                 </label>
 
                                 <input
@@ -100,14 +95,12 @@
                                         type="text"
                                         name="username"
                                         value="{{ old('username') }}"
-                                        placeholder="Choose a username"
+                                        placeholder="{{ __('register.username_placeholder') }}"
                                         autocomplete="username"
                                 >
 
                                 @error('username')
-                                <span class="modern-auth-error">
-                                        {{ $message }}
-                                    </span>
+                                <span class="modern-auth-error">{{ $message }}</span>
                                 @enderror
 
                             </div>
@@ -117,7 +110,7 @@
                             <div class="modern-auth-field">
 
                                 <label for="email">
-                                    E-Mail Address
+                                    {{ __('register.email') }}
                                 </label>
 
                                 <input
@@ -125,14 +118,12 @@
                                         type="email"
                                         name="email"
                                         value="{{ old('email') }}"
-                                        placeholder="Enter your email"
+                                        placeholder="{{ __('register.email_placeholder') }}"
                                         autocomplete="email"
                                 >
 
                                 @error('email')
-                                <span class="modern-auth-error">
-                                        {{ $message }}
-                                    </span>
+                                <span class="modern-auth-error">{{ $message }}</span>
                                 @enderror
 
                             </div>
@@ -142,7 +133,7 @@
                             <div class="modern-auth-field">
 
                                 <label for="phone">
-                                    Phone
+                                    {{ __('register.phone') }}
                                 </label>
 
                                 <input
@@ -150,14 +141,12 @@
                                         type="tel"
                                         name="phone"
                                         value="{{ old('phone') }}"
-                                        placeholder="Enter your phone number"
+                                        placeholder="{{ __('register.phone_placeholder') }}"
                                         autocomplete="tel"
                                 >
 
                                 @error('phone')
-                                <span class="modern-auth-error">
-                                        {{ $message }}
-                                    </span>
+                                <span class="modern-auth-error">{{ $message }}</span>
                                 @enderror
 
                             </div>
@@ -167,21 +156,19 @@
                             <div class="modern-auth-field">
 
                                 <label for="password">
-                                    New Password
+                                    {{ __('register.password') }}
                                 </label>
 
                                 <input
                                         id="password"
                                         type="password"
                                         name="password"
-                                        placeholder="Create a password"
+                                        placeholder="{{ __('register.password_placeholder') }}"
                                         autocomplete="new-password"
                                 >
 
                                 @error('password')
-                                <span class="modern-auth-error">
-                                        {{ $message }}
-                                    </span>
+                                <span class="modern-auth-error">{{ $message }}</span>
                                 @enderror
 
                             </div>
@@ -191,21 +178,19 @@
                             <div class="modern-auth-field">
 
                                 <label for="password-confirm">
-                                    Confirm Password
+                                    {{ __('register.confirm_password') }}
                                 </label>
 
                                 <input
                                         id="password-confirm"
                                         type="password"
                                         name="password_confirmation"
-                                        placeholder="Confirm your password"
+                                        placeholder="{{ __('register.confirm_password_placeholder') }}"
                                         autocomplete="new-password"
                                 >
 
                                 @error('password_confirmation')
-                                <span class="modern-auth-error">
-                                        {{ $message }}
-                                    </span>
+                                <span class="modern-auth-error">{{ $message }}</span>
                                 @enderror
 
                             </div>
@@ -225,9 +210,7 @@
 
                                     <span class="modern-auth-checkmark"></span>
 
-                                    <span>
-                                        Remember Me
-                                    </span>
+                                    <span>{{ __('register.remember_me') }}</span>
 
                                 </label>
 
@@ -239,12 +222,9 @@
                                     type="submit"
                                     class="modern-auth-submit"
                             >
-                                <span>Register</span>
+                                <span>{{ __('register.register_button') }}</span>
 
-                                <svg
-                                        viewBox="0 0 24 24"
-                                        aria-hidden="true"
-                                >
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M5 12h13"></path>
                                     <path d="m13 6 6 6-6 6"></path>
                                 </svg>
@@ -255,12 +235,10 @@
                             {{-- Login --}}
                             <div class="modern-auth-footer">
 
-                                <span>
-                                    Already have an account?
-                                </span>
+                                <span>{{ __('register.already_have_account') }}</span>
 
                                 <a href="{{ route('login') }}">
-                                    Login
+                                    {{ __('register.login') }}
                                 </a>
 
                             </div>
@@ -278,4 +256,3 @@
     </main>
 
 @endsection
-

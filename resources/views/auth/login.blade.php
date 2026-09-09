@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Login')
+@section('title', __('auth.login_title'))
 
 @section('content')
 
@@ -15,13 +15,11 @@
                     {{-- Header --}}
                     <div class="modern-auth-heading">
 
-                        <span>ACCOUNT</span>
+                        <span>{{ __('auth.account') }}</span>
 
-                        <h1>Login</h1>
+                        <h1>{{ __('auth.login_title') }}</h1>
 
-                        <p>
-                            Sign in to your account to continue.
-                        </p>
+                        <p>{{ __('auth.login_subtitle') }}</p>
 
                     </div>
 
@@ -37,12 +35,11 @@
 
                             @csrf
 
-
                             {{-- Username --}}
                             <div class="modern-auth-field">
 
                                 <label for="username">
-                                    Username
+                                    {{ __('auth.username') }}
                                     <span>*</span>
                                 </label>
 
@@ -51,15 +48,13 @@
                                         type="text"
                                         name="username"
                                         value="{{ old('username') }}"
-                                        placeholder="Enter your username"
+                                        placeholder="{{ __('auth.username_placeholder') }}"
                                         autocomplete="username"
                                         required
                                 >
 
                                 @error('username')
-                                <span class="modern-auth-error">
-                                        {{ $message }}
-                                    </span>
+                                <span class="modern-auth-error">{{ $message }}</span>
                                 @enderror
 
                             </div>
@@ -69,7 +64,7 @@
                             <div class="modern-auth-field">
 
                                 <label for="pass">
-                                    Password
+                                    {{ __('auth.password') }}
                                     <span>*</span>
                                 </label>
 
@@ -79,7 +74,7 @@
                                             id="pass"
                                             type="password"
                                             name="password"
-                                            placeholder="Enter your password"
+                                            placeholder="{{ __('auth.password_placeholder') }}"
                                             autocomplete="current-password"
                                             required
                                     >
@@ -88,7 +83,7 @@
                                             type="button"
                                             class="modern-password-toggle"
                                             id="passwordToggle"
-                                            aria-label="Show password"
+                                            aria-label="{{ __('auth.show_password') }}"
                                     >
 
                                         <svg
@@ -105,9 +100,7 @@
                                 </div>
 
                                 @error('password')
-                                <span class="modern-auth-error">
-                                        {{ $message }}
-                                    </span>
+                                <span class="modern-auth-error">{{ $message }}</span>
                                 @enderror
 
                             </div>
@@ -125,9 +118,7 @@
                                             {{ old('remember') ? 'checked' : '' }}
                                     >
 
-                                    <span>
-                                        Remember me
-                                    </span>
+                                    <span>{{ __('auth.remember_me') }}</span>
 
                                 </label>
 
@@ -138,7 +129,7 @@
                                             href="{{ route('password.request') }}"
                                             class="modern-auth-link"
                                     >
-                                        Forgot your password?
+                                        {{ __('auth.forgot_password') }}
                                     </a>
 
                                 @endif
@@ -152,12 +143,9 @@
                                     class="modern-auth-submit"
                             >
 
-                                <span>Login</span>
+                                <span>{{ __('auth.login_button') }}</span>
 
-                                <svg
-                                        viewBox="0 0 24 24"
-                                        aria-hidden="true"
-                                >
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M5 12h13"></path>
                                     <path d="m13 6 6 6-6 6"></path>
                                 </svg>
@@ -168,10 +156,10 @@
                             {{-- Register --}}
                             <div class="modern-auth-register">
 
-                                <span>Don't have an account?</span>
+                                <span>{{ __('auth.no_account') }}</span>
 
                                 <a href="{{ route('register') }}">
-                                    Create an account
+                                    {{ __('auth.create_account') }}
                                 </a>
 
                             </div>
@@ -179,7 +167,7 @@
 
                             {{-- Social Login --}}
                             <div class="modern-auth-divider">
-                                <span>OR</span>
+                                <span>{{ __('auth.or') }}</span>
                             </div>
 
                             <a
@@ -187,16 +175,11 @@
                                     class="modern-social-button"
                             >
 
-                                <svg
-                                        viewBox="0 0 24 24"
-                                        aria-hidden="true"
-                                >
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M14 8h3V4h-3c-3.3 0-5 1.9-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.7.3-1 1-1Z"></path>
                                 </svg>
 
-                                <span>
-                                    Login with Facebook
-                                </span>
+                                <span>{{ __('auth.login_facebook') }}</span>
 
                             </a>
 
@@ -236,7 +219,9 @@
 
                 passwordToggle.setAttribute(
                     'aria-label',
-                    isPassword ? 'Hide password' : 'Show password'
+                    isPassword
+                        ? '{{ __('auth.hide_password') }}'
+                        : '{{ __('auth.show_password') }}'
                 );
 
             });
@@ -246,4 +231,3 @@
     </script>
 
 @endsection
-

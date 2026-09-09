@@ -6630,16 +6630,6 @@ Mobile
 
 
 /* =========================================================
-   Login
-   ========================================================= */
-
-html[dir="rtl"] .modern-auth-field label {
-    text-align: right;
-    display: block;
-}
-
-
-/* =========================================================
    Divider
    ========================================================= */
 
@@ -8969,89 +8959,4 @@ html[dir="ltr"] .luxury-footer-links {
         stroke-linejoin: round;
     }
 
-}
-
-/* =========================================================
-   PRODUCT VIEW ARROW - RTL / LTR
-========================================================= */
-
-html[dir="rtl"] .arrow-icon {
-    transform: scaleX(-1);
-}
-
-html[dir="ltr"] .arrow-icon {
-    transform: scaleX(1);
-}
-
-html[dir="rtl"] .modern-product-title {
-    text-align: right;
-}
-
-html[dir="ltr"] .modern-product-title {
-    text-align: left;
-}
-
-
-/* عكس السهم في زر إرسال الرسالة فقط */
-html[dir="rtl"] .contact-submit svg {
-    transform: rotate(180deg);
-}
-
-/* ======== CONTACT PAGE RTL FIX (SAFE) ======== */
-
-/* العنوان الرئيسي */
-html[dir="rtl"] .contact-page-heading > div {
-    text-align: right;
-}
-
-/* عنوان كرت الرسالة */
-html[dir="rtl"] .contact-card-heading {
-    text-align: right;
-}
-
-/* عناوين الحقول */
-html[dir="rtl"] .contact-field label {
-    text-align: right;
-    display: block;
-}
-
-/* نصوص داخل كرت معلومات التواصل */
-html[dir="rtl"] .contact-info-item > div span {
-    text-align: right;
-    display: block;
-}
-
-/* ======== Cart ======== */
-
-/* العنوان الرئيسي */
-html[dir="rtl"] .cart-page-heading > div {
-    text-align: right;
-}
-
-/* عناوين الجدول */
-html[dir="rtl"] .modern-cart-table th {
-    text-align: right;
-}
-
-/* ======== CART ARROWS RTL FIX ======== */
-
-/* السهم في أعلى الصفحة */
-html[dir="rtl"] .cart-continue-link svg {
-    transform: rotate(180deg);
-}
-
-/* السهم في أسفل الصفحة */
-html[dir="rtl"] .modern-cart-back svg {
-    transform: rotate(180deg);
-}
-
-/* لو فيه أسهم داخل الجدول (مكوّنات Livewire) */
-html[dir="rtl"] .modern-cart-table svg {
-    transform: rotate(180deg);
-}
-
-/* ======== Wishlist ======== */
-/* عكس السهم في زر متابعة التسوق */
-html[dir="rtl"] .wishlist-continue-link svg {
-    transform: rotate(180deg);
 }

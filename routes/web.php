@@ -17,6 +17,19 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
 
+Route::get('/language/{locale}', function (string $locale) {
+
+    abort_unless(
+        in_array($locale, ['ar', 'en'], true),
+        404
+    );
+
+    Session::put('locale', $locale);
+
+    return redirect()->back();
+
+})->name('language.switch');
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');

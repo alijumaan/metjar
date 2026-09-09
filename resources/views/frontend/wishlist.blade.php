@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Wishlist')
+@section('title', __('wishlist.my_wishlist'))
 
 @section('content')
-
 
     <main class="modern-wishlist-area">
 
@@ -14,12 +13,13 @@
                 {{-- Header --}}
                 <div class="store-section-heading wishlist-page-heading">
                     <div>
-                        <span>WISHLIST</span>
-                        <h2>My Wishlist</h2>
+                        <span>{{ __('wishlist.wishlist') }}</span>
+                        <h2>{{ __('wishlist.my_wishlist') }}</h2>
                     </div>
 
                     <a href="{{ route('shop.index') }}" class="wishlist-continue-link">
-                        Continue Shopping
+                        {{ __('wishlist.continue_shopping') }}
+
                         <svg viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M5 12h13"></path>
                             <path d="m13 6 6 6-6 6"></path>
@@ -38,9 +38,9 @@
                             <thead>
                             <tr>
                                 <th></th>
-                                <th>Product</th>
-                                <th>Price</th>
-                                <th>Move To Cart</th>
+                                <th>{{ __('wishlist.product') }}</th>
+                                <th>{{ __('wishlist.price') }}</th>
+                                <th>{{ __('wishlist.move_to_cart') }}</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -71,6 +71,5 @@
         </section>
 
     </main>
-
 
 @endsection

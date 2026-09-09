@@ -4,6 +4,8 @@
 
         <div class="modern-services-grid">
 
+
+            {{-- Fast Delivery --}}
             <div class="modern-service">
 
                 <div class="modern-service-icon">
@@ -11,13 +13,21 @@
                 </div>
 
                 <div class="modern-service-content">
-                    <h3>Fast delivery</h3>
-                    <p>Quick and reliable delivery to your door.</p>
+
+                    <h3>
+                        {{ __('home.services.fast_delivery.title') }}
+                    </h3>
+
+                    <p>
+                        {{ __('home.services.fast_delivery.description') }}
+                    </p>
+
                 </div>
 
             </div>
 
 
+            {{-- Secure Checkout --}}
             <div class="modern-service">
 
                 <div class="modern-service-icon">
@@ -25,13 +35,21 @@
                 </div>
 
                 <div class="modern-service-content">
-                    <h3>Secure checkout</h3>
-                    <p>Your payment and personal information are protected.</p>
+
+                    <h3>
+                        {{ __('home.services.secure_checkout.title') }}
+                    </h3>
+
+                    <p>
+                        {{ __('home.services.secure_checkout.description') }}
+                    </p>
+
                 </div>
 
             </div>
 
 
+            {{-- Customer Support --}}
             <div class="modern-service">
 
                 <div class="modern-service-icon">
@@ -39,11 +57,19 @@
                 </div>
 
                 <div class="modern-service-content">
-                    <h3>We're here to help</h3>
-                    <p>Our support team is ready whenever you need us.</p>
+
+                    <h3>
+                        {{ __('home.services.help.title') }}
+                    </h3>
+
+                    <p>
+                        {{ __('home.services.help.description') }}
+                    </p>
+
                 </div>
 
             </div>
+
 
         </div>
 

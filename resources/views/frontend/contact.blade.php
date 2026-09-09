@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Contact us')
+@section('title', __('contact.get_in_touch'))
 
 @section('content')
 
@@ -13,8 +13,8 @@
                 {{-- Contact Header --}}
                 <div class="store-section-heading contact-page-heading">
                     <div>
-                        <span>CONTACT</span>
-                        <h2>Get In Touch</h2>
+                        <span>{{ __('contact.contact') }}</span>
+                        <h2>{{ __('contact.get_in_touch') }}</h2>
                     </div>
                 </div>
 
@@ -26,12 +26,9 @@
                     <div class="contact-form-card">
 
                         <div class="contact-card-heading">
-                            <span>MESSAGE US</span>
-                            <h3>Contact Information</h3>
-                            <p>
-                                Have a question or need assistance?
-                                Send us a message and we'll get back to you.
-                            </p>
+                            <span>{{ __('contact.message_us') }}</span>
+                            <h3>{{ __('contact.contact_info') }}</h3>
+                            <p>{{ __('contact.contact_text') }}</p>
                         </div>
 
                         @include('partials.frontend.flash')
@@ -43,14 +40,14 @@
 
                                 {{-- Name --}}
                                 <div class="contact-field">
-                                    <label for="contact-name">Name</label>
+                                    <label for="contact-name">{{ __('contact.name') }}</label>
 
                                     <input
                                             id="contact-name"
                                             type="text"
                                             name="name"
                                             value="{{ old('name') }}"
-                                            placeholder="Your name"
+                                            placeholder="{{ __('contact.name_placeholder') }}"
                                     >
 
                                     @error('name')
@@ -61,14 +58,14 @@
 
                                 {{-- Email --}}
                                 <div class="contact-field">
-                                    <label for="contact-email">Email</label>
+                                    <label for="contact-email">{{ __('contact.email') }}</label>
 
                                     <input
                                             id="contact-email"
                                             type="email"
                                             name="email"
                                             value="{{ old('email') }}"
-                                            placeholder="Your email"
+                                            placeholder="{{ __('contact.email_placeholder') }}"
                                     >
 
                                     @error('email')
@@ -77,16 +74,16 @@
                                 </div>
 
 
-                                {{-- Title --}}
+                                {{-- Subject --}}
                                 <div class="contact-field contact-field-full">
-                                    <label for="contact-title">Subject</label>
+                                    <label for="contact-title">{{ __('contact.subject') }}</label>
 
                                     <input
                                             id="contact-title"
                                             type="text"
                                             name="title"
                                             value="{{ old('title') }}"
-                                            placeholder="What is this about?"
+                                            placeholder="{{ __('contact.subject_placeholder') }}"
                                     >
 
                                     @error('title')
@@ -97,12 +94,12 @@
 
                                 {{-- Message --}}
                                 <div class="contact-field contact-field-full">
-                                    <label for="contact-message">Message</label>
+                                    <label for="contact-message">{{ __('contact.message') }}</label>
 
                                     <textarea
                                             id="contact-message"
                                             name="message"
-                                            placeholder="Write your message..."
+                                            placeholder="{{ __('contact.message_placeholder') }}"
                                     >{{ old('message') }}</textarea>
 
                                     @error('message')
@@ -114,16 +111,10 @@
 
 
                             {{-- Submit --}}
-                            <button
-                                    type="submit"
-                                    class="contact-submit"
-                            >
-                                <span>Send Message</span>
+                            <button type="submit" class="contact-submit">
+                                <span>{{ __('contact.send_message') }}</span>
 
-                                <svg
-                                        viewBox="0 0 24 24"
-                                        aria-hidden="true"
-                                >
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
                                     <path d="M5 12h13"></path>
                                     <path d="m13 6 6 6-6 6"></path>
                                 </svg>
@@ -138,8 +129,8 @@
                     <aside class="contact-info-card">
 
                         <div class="contact-card-heading">
-                            <span>CONTACT DETAILS</span>
-                            <h3>Location & Details</h3>
+                            <span>{{ __('contact.contact_details') }}</span>
+                            <h3>{{ __('contact.location_details') }}</h3>
                         </div>
 
 
@@ -149,17 +140,14 @@
                             <div class="contact-info-item">
 
                                 <div class="contact-info-icon">
-                                    <svg
-                                            viewBox="0 0 24 24"
-                                            aria-hidden="true"
-                                    >
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
                                         <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path>
                                         <circle cx="12" cy="10" r="2.5"></circle>
                                     </svg>
                                 </div>
 
                                 <div>
-                                    <span>Address</span>
+                                    <span>{{ __('contact.address') }}</span>
                                     <p>{!! getSettingsOf('address') !!}</p>
                                 </div>
 
@@ -170,23 +158,14 @@
                             <div class="contact-info-item">
 
                                 <div class="contact-info-icon">
-                                    <svg
-                                            viewBox="0 0 24 24"
-                                            aria-hidden="true"
-                                    >
-                                        <rect
-                                                x="3"
-                                                y="5"
-                                                width="18"
-                                                height="14"
-                                                rx="2"
-                                        ></rect>
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <rect x="3" y="5" width="18" height="14" rx="2"></rect>
                                         <path d="m3 7 9 6 9-6"></path>
                                     </svg>
                                 </div>
 
                                 <div>
-                                    <span>Email</span>
+                                    <span>{{ __('contact.email') }}</span>
                                     <p>{!! getSettingsOf('site_email') !!}</p>
                                 </div>
 
@@ -197,16 +176,13 @@
                             <div class="contact-info-item">
 
                                 <div class="contact-info-icon">
-                                    <svg
-                                            viewBox="0 0 24 24"
-                                            aria-hidden="true"
-                                    >
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
                                         <path d="M7 3h3l2 5-2 2a14 14 0 0 0 4 4l2-2 5 2v3c0 1-1 2-2 2C10.8 19 5 13.2 5 6c0-1.7.8-3 2-3Z"></path>
                                     </svg>
                                 </div>
 
                                 <div>
-                                    <span>Phone</span>
+                                    <span>{{ __('contact.phone') }}</span>
                                     <p>{!! getSettingsOf('phone_number') !!}</p>
                                 </div>
 

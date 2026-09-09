@@ -11,7 +11,7 @@
         @else
 
             <div class="store-editorial-placeholder">
-                DISCOVER
+                {{ __('home.editorial.placeholder') }}
             </div>
 
         @endif
@@ -22,31 +22,31 @@
     <div class="store-editorial-content">
 
         <span>
-            CURATED FOR YOU
+            {{ __('home.editorial.eyebrow') }}
         </span>
+
 
         <h2>
 
-            Upgrade
+            {{ __('home.editorial.title') }}
 
             <em>
-                your everyday.
+                {{ __('home.editorial.title_emphasis') }}
             </em>
 
         </h2>
 
+
         <p>
-
-            From the latest technology to timeless style,
-            discover pieces designed to make everyday life better.
-
+            {{ __('home.editorial.description') }}
         </p>
 
 
-        <a href="{{ route('shop.index') }}"
-           class="store-button store-button-dark">
+        <a
+                href="{{ route('shop.index') }}"
+                class="store-button store-button-dark">
 
-            EXPLORE COLLECTION
+            {{ __('home.editorial.explore_collection') }}
 
             <span>→</span>
 

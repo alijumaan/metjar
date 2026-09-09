@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Shop products')
+@section('title', __('shop.shop') . ' - ' . __('shop.all_products'))
 
 @section('content')
 
@@ -14,12 +14,11 @@
                 <div class="store-section-heading shop-page-heading">
 
                     <div>
-                        <span>SHOP</span>
-                        <h2>All Products</h2>
+                        <span>{{ __('shop.shop') }}</span>
+                        <h2>{{ __('shop.all_products') }}</h2>
                     </div>
 
                 </div>
-
 
                 {{-- Products --}}
                 <div class="shop-products">

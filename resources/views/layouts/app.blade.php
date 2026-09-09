@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html
+        lang="{{ app()->getLocale() }}"
+        dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}"
+>
 
 <head>
     <meta charset="utf-8">
@@ -7,12 +10,22 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>
-        {{ config('app.name', 'Ali Shop') }} | @yield('title', 'Home')
+        {{ config('app.name', 'Ali Shop') }} | @yield('title', __('general.home'))
     </title>
 
-    <meta name="description" content="@yield('meta_description', 'Discover electronics, fashion, watches and footwear.')">
+    <meta
+            name="description"
+            content="@yield('meta_description', __('general.meta_description'))"
+    >
+
+    <!-- Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+            rel="stylesheet"
+    >
 
     <link rel="icon" href="{{ asset('img/logo.png') }}" type="image/x-icon">
+
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     {{-- New storefront --}}
@@ -22,7 +35,7 @@
     @yield('style')
 </head>
 
-<body>
+<body class="locale-{{ app()->getLocale() }}">
 
 @include('partials.frontend.modern-header')
 

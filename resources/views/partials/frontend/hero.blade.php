@@ -2,81 +2,84 @@
 
     {{-- Announcement bar --}}
     <div class="store-announcement">
+
         <div class="store-container store-announcement-inner">
+
             <span>
-                FREE SHIPPING ON ORDERS OVER 250 SAR
+                {{ __('home.announcement.free_shipping') }}
             </span>
+
+
             @if($coupon)
+
                 <a href="{{ route('shop.index') }}">
+
                     {{ $coupon->value }}
                     {{ $coupon->type == 'percentage' ? '%' : ' SAR' }}
-                    OFF
-                    <strong>{{ $coupon->code }}</strong>
+                    {{ __('home.announcement.off') }}
+
+                    <strong>
+                        {{ $coupon->code }}
+                    </strong>
+
                 </a>
+
             @else
+
                 <span class="announcement-desktop">
-                    NEW SEASON · NEW ESSENTIALS
+                    {{ __('home.announcement.new_season') }}
                 </span>
+
             @endif
+
+
             <span class="announcement-desktop">
-                SECURE CHECKOUT
+                {{ __('home.announcement.secure_checkout') }}
             </span>
+
         </div>
+
     </div>
 
     <div class="store-hero-glow"></div>
 
     <div class="store-container store-hero-inner">
 
-
         {{-- Copy --}}
         <div class="store-hero-copy">
-
             <div class="store-eyebrow">
-
                 <span></span>
-
-                THE NEW COLLECTION · 2026
-
+                {{ __('home.hero.eyebrow') }}
             </div>
 
-
             <h1>
-
-                Everything
-                <em>you want.</em>
-
+                {{ __('home.hero.title') }}
+                <em>
+                    {{ __('home.hero.title_emphasis') }}
+                </em>
                 <br>
-
-                <strong>One place.</strong>
-
+                <strong>
+                    {{ __('home.hero.title_strong') }}
+                </strong>
             </h1>
-
-
             <p>
-                Discover electronics, fashion, watches and footwear
-                selected for the way you live.
+                {{ __('home.hero.description') }}
             </p>
-
-
             <div class="store-hero-actions">
-
-                <a href="{{ route('shop.index') }}"
-                   class="store-button store-button-dark">
-
-                    SHOP NOW
-
+                <a
+                        href="{{ route('shop.index') }}"
+                        class="store-button store-button-dark"
+                >
+                    {{ __('home.hero.shop_now') }}
                     <span>→</span>
-
                 </a>
 
-                <a href="#categories"
-                   class="store-button-link">
-
-                    EXPLORE CATEGORIES
-
+                <a
+                        href="#categories"
+                        class="store-button-link"
+                >
+                    {{ __('home.hero.explore_categories') }}
                     <span>↓</span>
-
                 </a>
             </div>
         </div>
@@ -86,23 +89,24 @@
             <div class="store-hero-products">
                 @foreach($heroProducts as $index => $product)
                     @if($product->firstMedia)
-                        <a href="javascript:void(0);" class="store-hero-product hero-product-{{ $index + 1 }}">
-
+                        <a
+                                href="javascript:void(0);"
+                                class="store-hero-product hero-product-{{ $index + 1 }}"
+                        >
                             <div class="hero-product-number">
-
                                 {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
-
                             </div>
 
                             <div class="hero-product-image">
                                 <img
                                         src="{{ asset('storage/images/products/' . $product->firstMedia->file_name) }}"
-                                        alt="{{ $product->name }}">
+                                        alt="{{ $product->name }}"
+                                >
                             </div>
 
                             <div class="hero-product-info">
                                 <small>
-                                    {{ $product->category->name ?? 'Collection' }}
+                                    {{ $product->category->name ?? __('home.hero.collection') }}
                                 </small>
 
                                 <strong>
@@ -119,34 +123,24 @@
                 @endforeach
             </div>
         @endif
-    </div>
 
+    </div>
 
     {{-- Quick categories --}}
-    <div class="store-container">
-
-        <div class="store-hero-categories">
-
-            @foreach($shop_categories_menu->take(4) as $index => $category)
-
-                <a href="{{ route('shop.index', $category->slug) }}">
-
-                    <span>
-                        {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
-                    </span>
-
-                    <strong>
-                        {{ $category->name }}
-                    </strong>
-
-                    <b>↗</b>
-
-                </a>
-
-            @endforeach
-
-        </div>
-
-    </div>
+{{--    <div class="store-container">--}}
+{{--        <div class="store-hero-categories">--}}
+{{--            @foreach($shop_categories_menu->take(4) as $index => $category)--}}
+{{--                <a href="{{ route('shop.index', $category->slug) }}">--}}
+{{--                    <span>--}}
+{{--                        {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}--}}
+{{--                    </span>--}}
+{{--                    <strong>--}}
+{{--                        {{ $category->name }}--}}
+{{--                    </strong>--}}
+{{--                    <b>↗</b>--}}
+{{--                </a>--}}
+{{--            @endforeach--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
 </section>

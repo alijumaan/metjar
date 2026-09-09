@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Cart')
+@section('title', __('cart.your_cart'))
 
 @section('content')
-
 
     <main class="modern-cart-area">
 
@@ -15,8 +14,8 @@
                 <div class="store-section-heading cart-page-heading">
 
                     <div>
-                        <span>SHOPPING CART</span>
-                        <h2>Your Cart</h2>
+                        <span>{{ __('cart.shopping_cart') }}</span>
+                        <h2>{{ __('cart.your_cart') }}</h2>
                     </div>
 
                     <a href="{{ route('shop.index') }}" class="cart-continue-link">
@@ -26,7 +25,7 @@
                             <path d="m11 18-6-6 6-6"></path>
                         </svg>
 
-                        Continue Shopping
+                        {{ __('cart.continue_shopping') }}
 
                     </a>
 
@@ -43,10 +42,10 @@
                             <thead>
                             <tr>
                                 <th></th>
-                                <th>Product</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
+                                <th>{{ __('cart.product') }}</th>
+                                <th>{{ __('cart.price') }}</th>
+                                <th>{{ __('cart.quantity') }}</th>
+                                <th>{{ __('cart.total') }}</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -88,25 +87,21 @@
                 {{-- Actions --}}
                 <div class="modern-cart-actions">
 
-                    <a
-                            href="{{ route('shop.index') }}"
-                            class="modern-cart-back"
-                    >
+                    <a href="{{ route('shop.index') }}" class="modern-cart-back">
+
                         <svg viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M19 12H5"></path>
                             <path d="m11 18-6-6 6-6"></path>
                         </svg>
 
-                        Continue Shopping
-                    </a>
+                        {{ __('cart.continue_shopping') }}
 
+                    </a>
 
                     @if(Cart::instance('default')->count())
 
                         <div class="modern-cart-checkout">
-
                             <livewire:frontend.button.proceed-checkout-button-component />
-
                         </div>
 
                     @endif
@@ -118,6 +113,5 @@
         </section>
 
     </main>
-
 
 @endsection
