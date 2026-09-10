@@ -75,16 +75,17 @@
 
                         <div class="product-fruit-content mt-2">
 
-                            <h4>
+                            <h3 class="modern-product-title">
                                 <a href="{{ route('product.show', $product->slug) }}">
                                     {{ $product->name }}
                                 </a>
-                            </h4>
+                            </h3>
 
-                            <span>
+                            <div class="modern-product-bottom">
+                            <span class="modern-product-price">
                                 ${{ $product->price }}
                             </span>
-
+                            </div>
                         </div>
 
                     </div>
