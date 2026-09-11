@@ -1,38 +1,99 @@
-<div class="card border-0 rounded-0 p-lg-4 bg-light">
-    <div class="card-body">
-        <div class="py-2 px-4 mb-3 {{ Route::currentRouteName() == 'user.dashboard' ? 'bg-dark' : 'bg-light' }}">
-            <a class="text-decoration-none"  href="{{ route('user.dashboard') }}">
-                <strong class="{{ Route::currentRouteName() == 'user.dashboard' ? 'text-white' : '' }} text-uppercase font-weight-bold">Dashboard</strong>
-            </a>
-        </div>
+<div class="modern-account-menu">
+    <div class="modern-account-menu-header">
+    <span>
+        {{ __('user.account') }}
+    </span>
 
-        <div class="py-2 px-4 mb-3 {{ Route::currentRouteName() == 'user.profile' ? 'bg-dark' : 'bg-light' }}">
-            <a class="text-decoration-none" href="{{ route('user.profile') }}">
-                <strong class="{{ Route::currentRouteName() == 'user.profile' ? 'text-white' : '' }} text-uppercase font-weight-bold">Profile</strong>
-            </a>
-        </div>
-
-        <div class="py-2 px-4 mb-3 {{ Route::currentRouteName() == 'user.addresses' ? 'bg-dark' : 'bg-light' }}">
-            <a class="text-decoration-none"  href="{{ route('user.addresses') }}">
-                <strong class="{{ Route::currentRouteName() == 'user.addresses' ? 'text-white' : '' }} text-uppercase font-weight-bold">Addresses</strong>
-            </a>
-        </div>
-
-        <div class="py-2 px-4 mb-3 {{ Route::currentRouteName() == 'user.orders' ? 'bg-dark' : 'bg-light' }}">
-            <a class="text-decoration-none"  href="{{ route('user.orders') }}">
-                <strong class="{{ Route::currentRouteName() == 'user.orders' ? 'text-white' : '' }} text-uppercase font-weight-bold">Orders</strong>
-            </a>
-        </div>
-
-        <div class="py-2 px-4 mb-3 bg-light">
-            <a class="text-decoration-none"  href="javascript:void(0);" onclick="event.preventDefault();
-            document.getElementById('logout-form').submit();">
-                <strong class="text-uppercase font-weight-bold">Logout</strong>
-            </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
-        </div>
-
+        <strong>
+            {{ __('user.menu') }}
+        </strong>
     </div>
+
+
+    {{-- Dashboard --}}
+    <a
+            href="{{ route('user.dashboard') }}"
+            class="modern-account-menu-item {{ Route::currentRouteName() == 'user.dashboard' ? 'is-active' : '' }}"
+    >
+    <span class="modern-account-menu-number">
+        01
+    </span>
+
+        <span class="modern-account-menu-title">
+        {{ __('user.dashboard') }}
+    </span>
+    </a>
+
+
+    {{-- Profile --}}
+    <a
+            href="{{ route('user.profile') }}"
+            class="modern-account-menu-item {{ Route::currentRouteName() == 'user.profile' ? 'is-active' : '' }}"
+    >
+    <span class="modern-account-menu-number">
+        02
+    </span>
+
+        <span class="modern-account-menu-title">
+        {{ __('user.profile') }}
+    </span>
+    </a>
+
+
+    {{-- Addresses --}}
+    <a
+            href="{{ route('user.addresses') }}"
+            class="modern-account-menu-item {{ Route::currentRouteName() == 'user.addresses' ? 'is-active' : '' }}"
+    >
+    <span class="modern-account-menu-number">
+        03
+    </span>
+
+        <span class="modern-account-menu-title">
+        {{ __('user.addresses') }}
+    </span>
+    </a>
+
+
+    {{-- Orders --}}
+    <a
+            href="{{ route('user.orders') }}"
+            class="modern-account-menu-item {{ Route::currentRouteName() == 'user.orders' ? 'is-active' : '' }}"
+    >
+    <span class="modern-account-menu-number">
+        04
+    </span>
+
+        <span class="modern-account-menu-title">
+        {{ __('user.orders') }}
+    </span>
+    </a>
+
+
+    {{-- Logout --}}
+    <a
+            href="javascript:void(0);"
+            class="modern-account-menu-item modern-account-logout"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+    >
+    <span class="modern-account-menu-number">
+        05
+    </span>
+
+        <span class="modern-account-menu-title">
+        {{ __('user.logout') }}
+    </span>
+
+    </a>
+
+
+    <form
+            id="logout-form"
+            action="{{ route('logout') }}"
+            method="POST"
+            style="display:none;"
+    >
+        @csrf
+    </form>
+
 </div>

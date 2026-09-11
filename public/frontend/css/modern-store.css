@@ -9606,3 +9606,612 @@ html[dir="rtl"] .wishlist-continue-link svg {
         font-size: 12px;
     }
 }
+
+.modern-password-wrapper {
+    position: relative;
+}
+
+.modern-password-wrapper input {
+    width: 100%;
+}
+
+/* Password eye */
+.modern-password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 36px;
+    height: 36px;
+
+    padding: 0;
+    border: 0;
+    background: transparent;
+
+    color: #777;
+    cursor: pointer;
+}
+
+/* Arabic / RTL */
+html[dir="rtl"] .modern-password-toggle {
+    right: auto;
+    left: 14px;
+}
+
+/* English / LTR */
+html[dir="ltr"] .modern-password-toggle {
+    left: auto;
+    right: 14px;
+}
+
+.modern-password-eye {
+    width: 19px;
+    height: 19px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    transition: color .2s ease, transform .2s ease;
+}
+
+.modern-password-toggle:hover {
+    color: #111;
+}
+
+.modern-password-toggle:hover .modern-password-eye {
+    transform: scale(1.08);
+}
+
+/* Leave space for the eye */
+html[dir="ltr"] .modern-password-wrapper input {
+    padding-right: 50px;
+    padding-left: 16px;
+}
+
+html[dir="rtl"] .modern-password-wrapper input {
+    padding-left: 50px;
+    padding-right: 16px;
+}
+
+
+/* =========================================================
+      MODERN ACCOUNT / DASHBOARD
+      RTL / LTR READY
+========================================================= */
+
+   .modern-account-page {
+       background: #fff;
+       min-height: 70vh;
+   }
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.modern-account-hero {
+    position: relative;
+
+    padding: 45px 0;
+
+    background: #111;
+    color: #fff;
+
+    overflow: hidden;
+}
+
+.modern-account-hero::after {
+    content: "";
+
+    position: absolute;
+
+    inset-inline-end: -120px;
+    top: -180px;
+
+    width: 420px;
+    height: 420px;
+
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 50%;
+}
+
+.modern-account-hero-content {
+    position: relative;
+    z-index: 2;
+
+    text-align: start;
+}
+
+.modern-account-eyebrow {
+    display: block;
+
+    margin-bottom: 14px;
+
+    color: #a8a8a8;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    letter-spacing: 3px;
+}
+
+.modern-account-hero h1 {
+    margin: 0 0 20px;
+
+    color: #fff;
+
+    font-size: clamp(38px, 5vw, 64px);
+    line-height: 1;
+
+    font-weight: 500;
+    letter-spacing: -2px;
+}
+
+.modern-account-breadcrumb {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    color: #888;
+
+    font-size: 12px;
+}
+
+.modern-account-breadcrumb a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.modern-account-breadcrumb a:hover {
+    color: var(--store-gold, #c2993b);
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.modern-account-content {
+    padding: 80px 0 110px;
+}
+
+.modern-account-layout {
+    display: grid;
+
+    /*
+     * Main content first in the HTML.
+     * In RTL the grid automatically places the
+     * first column on the right.
+     */
+    grid-template-columns: minmax(0, 1fr) 300px;
+
+    gap: 70px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.modern-account-welcome {
+    margin-bottom: 45px;
+
+    text-align: start;
+}
+
+.modern-account-section-label {
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: #999;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.modern-account-welcome h2 {
+    margin: 0 0 12px;
+
+    color: #151515;
+
+    font-size: 34px;
+    line-height: 1.15;
+
+    font-weight: 500;
+    letter-spacing: -.8px;
+}
+
+.modern-account-welcome p {
+    max-width: 520px;
+
+    margin: 0;
+
+    color: #777;
+
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   ACCOUNT CARDS
+   ========================================================= */
+
+.modern-account-cards {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 15px;
+}
+
+.modern-account-card {
+    position: relative;
+
+    min-height: 210px;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 25px;
+
+    border: 1px solid #e9e9e9;
+
+    background: #fff;
+
+    color: #151515;
+
+    text-decoration: none;
+
+    overflow: hidden;
+
+    transition:
+            transform .3s ease,
+            border-color .3s ease,
+            background .3s ease;
+}
+
+.modern-account-card:hover {
+    transform: translateY(-5px);
+
+    border-color: #151515;
+
+    color: #151515;
+}
+
+.modern-account-card-number {
+    color: #aaa;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: 1px;
+}
+
+.modern-account-card-content {
+    margin-block-start: auto;
+}
+
+.modern-account-card-content h3 {
+    margin: 0 0 8px;
+
+    color: #151515;
+
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.modern-account-card-content p {
+    margin: 0;
+
+    color: #888;
+
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.modern-account-card-arrow {
+    position: absolute;
+
+    inset-inline-end: 22px;
+    bottom: 20px;
+
+    color: #151515;
+
+    font-size: 18px;
+
+    transition: transform .3s ease;
+}
+
+.modern-account-card:hover .modern-account-card-arrow {
+    /*
+     * In RTL move toward the left.
+     * In LTR move toward the right.
+     */
+    transform: translateX(5px);
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.modern-account-sidebar {
+    width: 100%;
+}
+
+.modern-account-menu {
+    border-top: 1px solid #151515;
+}
+
+
+/* =========================================================
+   SIDEBAR HEADER
+   ========================================================= */
+
+.modern-account-menu-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 18px 0;
+
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.modern-account-menu-header span {
+    color: #999;
+
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.modern-account-menu-header strong {
+    color: #151515;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   MENU ITEM
+   ========================================================= */
+
+.modern-account-menu-item {
+    position: relative;
+
+    min-height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 0 2px;
+
+    border-bottom: 1px solid #e8e8e8;
+
+    color: #555;
+
+    text-decoration: none;
+
+    transition:
+            color .25s ease,
+            padding .25s ease;
+}
+
+.modern-account-menu-item:hover {
+    /*
+     * Logical property:
+     * LTR -> moves right
+     * RTL -> moves left
+     */
+    padding-inline-start: 8px;
+
+    color: #151515;
+}
+
+.modern-account-menu-number {
+    width: 25px;
+
+    flex-shrink: 0;
+
+    color: #aaa;
+
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.modern-account-menu-title {
+    flex: 1;
+
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.modern-account-menu-arrow {
+    color: #aaa;
+
+    font-size: 15px;
+
+    transition: transform .25s ease;
+}
+
+.modern-account-menu-item:hover .modern-account-menu-arrow {
+    transform: translateX(4px);
+
+    color: #151515;
+}
+
+
+/* =========================================================
+   ACTIVE
+   ========================================================= */
+
+.modern-account-menu-item.is-active {
+    padding-inline-start: 8px;
+
+    color: #151515;
+}
+
+.modern-account-menu-item.is-active::before {
+    content: "";
+
+    position: absolute;
+
+    inset-inline-start: -1px;
+
+    top: 0;
+    bottom: 0;
+
+    width: 2px;
+
+    background: var(--store-gold, #c2993b);
+}
+
+.modern-account-menu-item.is-active .modern-account-menu-number {
+    color: var(--store-gold, #c2993b);
+}
+
+.modern-account-menu-item.is-active .modern-account-menu-arrow {
+    color: #151515;
+}
+
+
+/* =========================================================
+   LOGOUT
+   ========================================================= */
+
+.modern-account-logout {
+    margin-top: 15px;
+
+    border: 1px solid #e8e8e8;
+
+    padding-inline: 12px;
+}
+
+.modern-account-logout:hover {
+    border-color: #151515;
+
+    padding-inline-start: 18px;
+}
+
+
+/* =========================================================
+   RTL
+   ========================================================= */
+
+html[dir="rtl"] .modern-account-card-arrow,
+html[dir="rtl"] .modern-account-menu-arrow {
+    transform: scaleX(-1);
+}
+
+html[dir="rtl"] .modern-account-card:hover .modern-account-card-arrow {
+    transform: scaleX(-1) translateX(5px);
+}
+
+html[dir="rtl"] .modern-account-menu-item:hover .modern-account-menu-arrow {
+    transform: scaleX(-1) translateX(4px);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 991px) {
+
+    .modern-account-layout {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+    }
+
+    .modern-account-sidebar {
+        order: 2;
+    }
+
+    .modern-account-main {
+        order: 1;
+    }
+
+}
+
+
+@media (max-width: 767px) {
+
+    .modern-account-hero {
+        padding: 60px 0 55px;
+    }
+
+    .modern-account-hero h1 {
+        font-size: 40px;
+        letter-spacing: -1px;
+    }
+
+    .modern-account-content {
+        padding: 50px 0 70px;
+    }
+
+    .modern-account-layout {
+        gap: 40px;
+    }
+
+    .modern-account-welcome {
+        margin-bottom: 30px;
+    }
+
+    .modern-account-welcome h2 {
+        font-size: 28px;
+    }
+
+    .modern-account-welcome p {
+        font-size: 13px;
+    }
+
+    /* Two cards per row */
+    .modern-account-cards {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 10px;
+    }
+
+    .modern-account-card {
+        min-height: 175px;
+
+        padding: 18px;
+    }
+
+    .modern-account-card-content h3 {
+        font-size: 16px;
+    }
+
+    .modern-account-card-content p {
+        font-size: 11px;
+    }
+
+    .modern-account-card-arrow {
+        inset-inline-end: 15px;
+        bottom: 14px;
+
+        font-size: 15px;
+    }
+
+}
