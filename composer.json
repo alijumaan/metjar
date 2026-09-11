@@ -78,6 +78,7 @@
     "prefer-stable": true,
     "require-dev": {
         "fakerphp/faker": "^1.24",
+        "mockery/mockery": "^1.6",
         "phpunit/phpunit": "^11.0"
     }
 }
