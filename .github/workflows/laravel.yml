@@ -47,4 +47,4 @@ jobs:
           DB_PASSWORD: password
 
       - name: Run Tests
-        run: php artisan test
+        run: php vendor/bin/phpunit
