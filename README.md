@@ -1,20 +1,20 @@
-# Laravel E-commerce
+# Ali Shop
 
 <!-- PROJECT LOGO -->
-<p align="center"><a href="https://demoshop.alialqahtani.sa" target="_blank"><img src="https://demoshop.alialqahtani.sa/img/metjar.png" width="400" alt="Laravel-Ecommerce"></a></p>
+<p align="center"><a href="https://shop.alialqahtani.sa" target="_blank"><img src="https://shop.alialqahtani.sa/img/logo.png" width="400" alt="Ali Shop"></a></p>
 
 <p align="center">
   <p align="center">
-    <a href="https://github.com/alijumaan/laravel-ecommerce/issues">Report Bug</a>
+    <a href="https://github.com/alijumaan/metjar/issues">Report Bug</a>
     ·
-    <a href="https://github.com/alijumaan/laravel-ecommerce/issues">Request Feature</a>
+    <a href="https://github.com/alijumaan/metjar/issues">Request Feature</a>
   </p>
 
 ### Installation
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/alijumaan/laravel-ecommerce.git
+   git clone https://github.com/alijumaan/metjar.git
    ```
 2. Install Composer packages
    ```sh
